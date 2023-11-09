@@ -1,0 +1,108 @@
+@use "@/general-styles/variables.scss" as vrb;
+
+header {
+  background-color: vrb.$secondary;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.nav {
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+  }
+
+  &__menu {
+    display: flex;
+    align-self: center;
+    gap: 20px;
+    transition: 1s;
+
+    &__btn {
+      background-color: transparent;
+      cursor: pointer;
+      border: none;
+
+      svg {
+        fill: #fff;
+      }
+    }
+  }
+
+  &__logo {
+    font-size: 25px;
+    a {
+      color: #fff;
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+
+    a {
+      color: #fff;
+      opacity: 0.8;
+    }
+  }
+
+  &__login,
+  &__register {
+    padding: 10px 20px;
+    border: 1px solid #000;
+    border: none;
+    border-radius: 6px;
+    background-color: #fff;
+    color: vrb.$secondary !important;
+    width: 100px;
+  }
+}
+
+.hamburger {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: none;
+}
+
+.nav__cart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.nav__res__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 80px;
+  background-color: vrb.$secondary;
+  left: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  a {
+    flex-direction: row-reverse;
+    text-align: center;
+  }
+}
+
+@media (max-width: 650px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav__menu {
+    display: none;
+  }
+}

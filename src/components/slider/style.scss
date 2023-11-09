@@ -1,0 +1,58 @@
+@use "../../general-styles/variables.scss" as vrb;
+
+.product__img {
+  padding: 20px;
+  position: relative;
+  height: 300px;
+  max-width: 300px;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+  }
+}
+
+.product__border {
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.products__card {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.products__card {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.product__content {
+  p::first-letter {
+    text-transform:capitalize;
+}
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px;
+  color: #000;
+}
+
+.product__btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: vrb.$secondary;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid vrb.$secondary;
+}
+
+.button__wrapper {
+  padding: 10px;
+}
+
+.nav__login {
+  display: flex;
+  justify-content: center;
+}
