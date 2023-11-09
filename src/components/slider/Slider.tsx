@@ -9,7 +9,7 @@ import Link from "next/link";
 import Loading from "../loading/Loading";
 
 const Carousel = () => {
-  const { data: latestProducts, getData: getLatestProducts, loading } =
+  const { data: latestProducts, getData: getLatestProducts } =
     useLatestProducts();
 
   useEffect(() => {
@@ -54,7 +54,7 @@ const Carousel = () => {
   };
   return (
     <div>
-      {loading ? <Loading/> : <Slider {...settings}>
+      <Slider {...settings}>
         {latestProducts?.map((product) => (
           <div className="product__border" key={product?._id}>
             <div className="products__card">
@@ -84,7 +84,7 @@ const Carousel = () => {
             </div>
           </div>
         ))}
-      </Slider>}
+      </Slider>
     </div>
   );
 };
