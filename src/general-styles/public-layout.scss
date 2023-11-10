@@ -1,0 +1,8 @@
+@use "@/general-styles/variables.scss" as vrb;
+
+footer {
+  background-color: vrb.$secondary;
+  color: #fff;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}

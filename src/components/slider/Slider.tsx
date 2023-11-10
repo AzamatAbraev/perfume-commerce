@@ -1,20 +1,27 @@
 "use client";
 import Slider from "react-slick";
 
-import "./style.scss";
 import useLatestProducts from "@/store/latestProducts";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Loading from "../loading/Loading";
+
+import "./style.scss";
+import useCart from "@/store/cart";
 
 const Carousel = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const { data: latestProducts, getData: getLatestProducts } =
     useLatestProducts();
+
+  const {addToCart} = useCart();
 
   useEffect(() => {
     getLatestProducts();
   }, [getLatestProducts]);
+
+
 
   const settings = {
     dots: false,
@@ -79,7 +86,7 @@ const Carousel = () => {
                 <p>Price: {product?.price || "Unknown"} UZS</p>
               </Link>
               <div className="button__wrapper">
-                <button className="product__btn">Add to cart</button>
+                <button onClick={() => addToCart(product?._id)} className="product__btn">Add to cart</button>
               </div>
             </div>
           </div>

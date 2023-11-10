@@ -1,6 +1,5 @@
 import { request } from "@/server/request";
 import CategoryType from "@/types/category";
-import ProductType from "@/types/product";
 import { create } from "zustand";
 
 interface LatestType {
