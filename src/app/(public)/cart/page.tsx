@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import "./style.scss";
+import CartCard from "@/components/card/CartCard";
 
 export const metadata: Metadata = {
   title: "Vodiy perfume | Cart",
@@ -8,7 +9,12 @@ export const metadata: Metadata = {
 };
 
 const CartPage = () => {
-  return <div>CartPage</div>;
+  return <section className="cart">
+    <div className="container">
+      <h1 className="cart__title">My Cart</h1>
+      <CartCard/>
+    </div>
+  </section>;
 };
 
 export default CartPage;

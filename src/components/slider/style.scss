@@ -60,3 +60,20 @@
   display: flex;
   justify-content: center;
 }
+
+.favourite__btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: transparent;
+  border: none;
+  // padding: 5px;
+
+  svg {
+    fill: red;
+  }
+}
+
+.product__img {
+  position: relative;
+}

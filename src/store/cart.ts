@@ -1,7 +1,7 @@
+import { CART } from "@/constants";
 import { request } from "@/server/request";
 import CartType from "@/types/cart";
 import CategoryType from "@/types/category";
-import { LargeNumberLike } from "crypto";
 import { create } from "zustand";
 
 interface LatestType {
@@ -10,14 +10,24 @@ interface LatestType {
   cart: CartType[];
   data: CategoryType[];
   getData: () => void;
-  addToCart: (id: string) => void;
+  addToCart: (
+    id: string,
+    image: string,
+    title: string,
+    description: string,
+    price: number
+  ) => void;
+  setCart: (newCart: CartType[]) => void;
 }
+
+  const productJson = localStorage.getItem(CART);
+  const cart = productJson ? JSON.parse(productJson) : [];
 
 const useCart = create<LatestType>()((set, get) => ({
   loading: false,
   quantity: 1,
   data: [],
-  cart: [],
+  cart,
   getData: async () => {
     try {
       set({ loading: true });
@@ -27,15 +37,26 @@ const useCart = create<LatestType>()((set, get) => ({
       set({ loading: true });
     }
   },
-  addToCart: async (id) => {
+
+  addToCart: async (id, image, title, description, price) => {
     const { cart } = get();
     const values = {
-      product: id,
+      id,
+      image,
+      title,
+      description,
+      price,
       quantity: 1,
     };
     cart.push(values);
-    console.log(cart);
+    set({cart})
+    localStorage.setItem(CART, JSON.stringify(cart));
   },
+  setCart: (newCart: CartType[]) => {
+    set({ cart: newCart })
+    localStorage.setItem(CART, JSON.stringify(get().cart));
+  },
+
 }));
 
 export default useCart;

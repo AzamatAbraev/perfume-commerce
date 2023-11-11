@@ -3,7 +3,7 @@ import Header from "@/components/list/header/Header";
 import { ChildrenType } from "@/types/children";
 import { Fragment } from "react";
 
-import "@/general-styles/public-layout.scss"
+import "@/general-styles/public-layout.scss";
 
 const PublicLayout = ({ children }: ChildrenType) => {
   return (
@@ -11,7 +11,7 @@ const PublicLayout = ({ children }: ChildrenType) => {
       <Header />
       <main className="container">{children}</main>
       <footer>
-        <Footer/>
+        <Footer />
       </footer>
     </Fragment>
   );

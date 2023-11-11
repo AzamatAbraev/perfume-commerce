@@ -5,17 +5,17 @@ import useLatestProducts from "@/store/latestProducts";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-import "./style.scss";
+import FavoriteBorderIconOutlined from "@mui/icons-material/FavoriteBorderOutlined";
 import useCart from "@/store/cart";
 
-const Carousel = () => {
-  const [isLoading, setIsLoading] = useState(false);
+import "./style.scss";
 
+const Carousel = () => {
   const { data: latestProducts, getData: getLatestProducts } =
     useLatestProducts();
 
   const {addToCart} = useCart();
+
 
   useEffect(() => {
     getLatestProducts();
@@ -75,6 +75,9 @@ const Carousel = () => {
                   fill
                   objectFit="cover"
                 />
+                <button className="favourite__btn">
+                  <FavoriteBorderIconOutlined />
+                </button>
               </div>
               <Link
                 href={`/allproducts/${product?._id}`}
@@ -86,7 +89,20 @@ const Carousel = () => {
                 <p>Price: {product?.price || "Unknown"} UZS</p>
               </Link>
               <div className="button__wrapper">
-                <button onClick={() => addToCart(product?._id)} className="product__btn">Add to cart</button>
+                <button
+                  onClick={() =>
+                    addToCart(
+                      product?._id,
+                      product?.image.url,
+                      product?.title,
+                      product?.description,
+                      product?.price,
+                    )
+                  }
+                  className="product__btn"
+                >
+                  Add to cart
+                </button>
               </div>
             </div>
           </div>

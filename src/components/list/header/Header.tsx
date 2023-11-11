@@ -9,12 +9,16 @@ import ShoppingCartIconOutlined from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import MenuIcon from "@mui/icons-material/Menu";
+import Badge from "@mui/material/Badge";
+import useCart from "@/store/cart";
 
 import "./style.scss";
 
 const Header = () => {
   const screenSize = useScreenSize();
   const [isNavOpen, setIsNavOpen] = useState(false);
+
+  const { cart } = useCart();
 
   useEffect(() => {
     if (screenSize > 650) {
@@ -48,8 +52,10 @@ const Header = () => {
             </li>
             <li className="nav__item">
               <Link className="nav__cart" href="/cart">
-                <ShoppingCartIconOutlined />
-                <p>My Cart</p>
+                <Badge badgeContent={cart.length} color="secondary">
+                  <ShoppingCartIconOutlined />
+                </Badge>
+                <p>My Cart </p>
               </Link>
             </li>
             <li className="nav__item">
