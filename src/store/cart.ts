@@ -1,3 +1,5 @@
+"use client"
+
 import { CART } from "@/constants";
 import { request } from "@/server/request";
 import CartType from "@/types/cart";
@@ -20,8 +22,8 @@ interface LatestType {
   setCart: (newCart: CartType[]) => void;
 }
 
-  const productJson = localStorage.getItem(CART);
-  const cart = productJson ? JSON.parse(productJson) : [];
+const productJson = typeof window !== 'undefined' ? localStorage.getItem(CART) : false;
+const cart = productJson ? JSON.parse(productJson) : [];
 
 const useCart = create<LatestType>()((set, get) => ({
   loading: false,
