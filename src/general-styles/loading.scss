@@ -79,5 +79,8 @@
 .ldio-uvx3kyll4mp div { box-sizing: content-box; }
 
 .loading-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
 }

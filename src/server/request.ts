@@ -15,7 +15,7 @@ request.interceptors.response.use(
     return response;
   },
   (err) => {
-    toast.error(err.response.data.message)
+    toast.error(err.response)
     return Promise.reject(err);
   }
 );

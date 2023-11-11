@@ -9,7 +9,9 @@ interface ProductType {
     url: string;
   };
   quantity: number;
-  category: string;
+  category: {
+    name: string,
+  };
   createdAt: string;
   updatedAt: string;
 }
