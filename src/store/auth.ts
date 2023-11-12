@@ -6,7 +6,7 @@ import { USER_TOKEN, USER_DATA } from "@/constants";
 interface AuthState {
   isAuthenticated: boolean,
   user: UserType | null, 
-  setIsAuthenticated: (user: UserType) => void; 
+  setIsAuthenticated: (user: UserType | null) => void; 
 }
 
 const userJson = typeof window !== "undefined" ? localStorage.getItem(USER_DATA) : false;

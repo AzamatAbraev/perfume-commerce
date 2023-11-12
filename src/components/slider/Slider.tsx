@@ -8,16 +8,17 @@ import Link from "next/link";
 import FavoriteBorderIconOutlined from "@mui/icons-material/FavoriteBorderOutlined";
 import useCart from "@/store/cart";
 import useFav from "@/store/fav";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import Loading from "../loading/Loading";
 
 import "./style.scss";
-import Loading from "../loading/Loading";
 
 const Carousel = () => {
   const { data: latestProducts, getData: getLatestProducts } =
     useLatestProducts();
 
-  const {addToCart} = useCart();
-  const {cart, addToFav} = useFav();
+  const {addToCart, cart} = useCart();
+  const {cart: favCart, addToFav} = useFav();
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -37,10 +38,12 @@ const Carousel = () => {
   }, [getLatestProducts]);
 
   const isProductInFav = (productId: string) => {
-    return cart.some((cartProduct) => cartProduct.id === productId);
+    return favCart.some((favCartProduct) => favCartProduct.id === productId);
   };
 
-
+   const isProductInCart = (productId: string) => {
+    return cart.some((cartProduct) => cartProduct.id === productId);
+  };
 
   const settings = {
     dots: false,
@@ -99,9 +102,8 @@ const Carousel = () => {
                     product?.image.url,
                     product?.title,
                     product?.description,
-                    product?.price)} className={`favourite__btn ${isProductInFav(product?._id) ? 'in-fav' : ''
-                  }`}>
-                  <FavoriteBorderIconOutlined />
+                    product?.price)} className="favourite__btn">
+                  {isProductInFav(product?._id) ? <FavoriteIcon /> : <FavoriteBorderIconOutlined /> }
                 </button>
               </div>
               <Link
@@ -124,9 +126,9 @@ const Carousel = () => {
                       product?.price,
                     )
                   }
-                  className="product__btn"
+                  className="product__btn" disabled={isProductInCart(product?._id) ? true : false} 
                 >
-                  Add to cart
+                  {isProductInCart(product?._id) ? "Added" : "Add to cart"  }
                 </button>
               </div>
             </div>

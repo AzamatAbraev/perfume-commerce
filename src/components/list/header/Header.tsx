@@ -11,19 +11,21 @@ import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import Badge from "@mui/material/Badge";
 import useCart from "@/store/cart";
+import useFav from "@/store/fav";
 import useAuth from "@/store/auth";
 import Cookies from "js-cookie";
 import {useRouter} from "next/navigation";
+import { USER_DATA, USER_TOKEN } from "@/constants";
 
 
 import "./style.scss";
-import { USER_DATA, USER_TOKEN } from "@/constants";
 
 const Header = () => {
   const screenSize = useScreenSize();
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const { cart } = useCart();
+  const { cart: favCart } = useFav();
   const {isAuthenticated, user, setIsAuthenticated} = useAuth();
 
   const router = useRouter();
@@ -41,7 +43,7 @@ const Header = () => {
   const logout = () => {
     localStorage.removeItem(USER_DATA);
     Cookies.remove(USER_TOKEN);
-    setIsAuthenticated(user);
+    setIsAuthenticated(user)
     router.push("/")
   }
 
@@ -61,7 +63,9 @@ const Header = () => {
             </li>
             <li className="nav__item">
               <Link className="nav__cart" href="/favourite">
-                <FavoriteBorderOutlinedIcon />
+                <Badge badgeContent={favCart.length} color="secondary">
+                    <FavoriteBorderOutlinedIcon />
+                </Badge>
                 <p>Favourite</p>
               </Link>
             </li>
@@ -102,7 +106,9 @@ const Header = () => {
               </li>
               <li className="nav__item">
                 <Link className="nav__cart" href="/favourite">
-                  <FavoriteBorderOutlinedIcon />
+                  <Badge badgeContent={favCart.length} color="secondary">
+                    <FavoriteBorderOutlinedIcon />
+                  </Badge>
                   <p>Favourite</p>
                 </Link>
               </li>
