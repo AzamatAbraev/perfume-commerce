@@ -9,6 +9,7 @@ import Pagination from '@mui/material/Pagination';
 
 import FavoriteBorderIconOutlined from "@mui/icons-material/FavoriteBorderOutlined";
 import useCart from "@/store/cart";
+import useFav from "@/store/fav";
 import { request } from "@/server/request";
 
 
@@ -30,6 +31,9 @@ const ProductCard = () => {
   const [total, setTotal] = useState(1);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
+
+  const { addToCart } = useCart();
+  const {addToFav, cart} = useFav();
 
   useEffect(() => {
     const getCategories = async() => {
@@ -71,8 +75,13 @@ const ProductCard = () => {
     setPage(value);
     console.log(value);
   }
+
+  const isProductInFav = (productId: string) => {
+    return cart.some((cartProduct) => cartProduct.id === productId);
+  };
   
-  const { addToCart } = useCart();
+
+
   return (
     <div>
       <Paper
@@ -114,7 +123,11 @@ const ProductCard = () => {
                 fill
                 objectFit="cover"
               />
-              <button className="favourite__btn">
+              <button onClick={() => addToFav(product?._id,
+                    product?.image.url,
+                    product?.title,
+                    product?.description,
+                    product?.price)} className="favourite__btn">
                 <FavoriteBorderIconOutlined />
               </button>
               <div className="category__info">{product?.category.name}</div>

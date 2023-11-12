@@ -11,14 +11,22 @@ import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import Badge from "@mui/material/Badge";
 import useCart from "@/store/cart";
+import useAuth from "@/store/auth";
+import Cookies from "js-cookie";
+import {useRouter} from "next/navigation";
+
 
 import "./style.scss";
+import { USER_DATA, USER_TOKEN } from "@/constants";
 
 const Header = () => {
   const screenSize = useScreenSize();
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const { cart } = useCart();
+  const {isAuthenticated, user, setIsAuthenticated} = useAuth();
+
+  const router = useRouter();
 
   useEffect(() => {
     if (screenSize > 650) {
@@ -29,6 +37,13 @@ const Header = () => {
   const controlNav = () => {
     setIsNavOpen(!isNavOpen);
   };
+
+  const logout = () => {
+    localStorage.removeItem(USER_DATA);
+    Cookies.remove(USER_TOKEN);
+    setIsAuthenticated(user);
+    router.push("/")
+  }
 
   return (
     <header>
@@ -58,16 +73,24 @@ const Header = () => {
                 <p>My Cart </p>
               </Link>
             </li>
-            <li className="nav__item">
-              <Link className="nav__login" href="/login">
-                Login
-              </Link>
-            </li>
-            <li className="nav__item">
-              <Link className="nav__register" href="/register">
-                Register
-              </Link>
-            </li>
+             {isAuthenticated ? (<li className="nav__item">
+                <Link className="nav__login" href="/account">
+                  {user?.firstName}
+                </Link>
+              </li>): (<li className="nav__item">
+                <Link className="nav__login" href="/login">
+                  Login
+                </Link>
+              </li>)}
+              {isAuthenticated ? (<li className="nav__item">
+                <button onClick={logout} className="nav__register__btn">
+                  Logout
+                </button>
+              </li>) : (<li className="nav__item">
+                <Link className="nav__register" href="/register">
+                  Register
+                </Link>
+              </li>)}
           </ul>
           {isNavOpen ? (
             <ul className="nav__res__menu">
@@ -85,20 +108,30 @@ const Header = () => {
               </li>
               <li className="nav__item">
                 <Link className="nav__cart" href="/cart">
-                  <ShoppingCartIconOutlined />
+                  <Badge badgeContent={cart.length} color="secondary">
+                    <ShoppingCartIconOutlined />
+                  </Badge>
                   <p>My Cart</p>
                 </Link>
               </li>
-              <li className="nav__item">
+              {isAuthenticated ? (<li className="nav__item">
+                <Link className="nav__login" href="/account">
+                  {user?.firstName}
+                </Link>
+              </li>): (<li className="nav__item">
                 <Link className="nav__login" href="/login">
                   Login
                 </Link>
-              </li>
-              <li className="nav__item">
+              </li>)}
+              {isAuthenticated ? (<li className="nav__item">
+                <button onClick={logout} className="nav__register__btn">
+                  Logout
+                </button>
+              </li>) : (<li className="nav__item">
                 <Link className="nav__register" href="/register">
                   Register
                 </Link>
-              </li>
+              </li>)}
             </ul>
           ) : null}
         </div>

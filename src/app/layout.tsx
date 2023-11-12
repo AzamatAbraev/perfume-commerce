@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { ChildrenType } from "@/types/children";
+import {ToastContainer} from "react-toastify";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -19,7 +20,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: ChildrenType) {
   return (
     <html suppressHydrationWarning={true} lang="en">
-      <body className={jakarta.className}>{children}</body>
+      <body className={jakarta.className}>
+        <ToastContainer/>
+        {children}
+        </body>
     </html>
   );
 }

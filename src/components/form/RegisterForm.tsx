@@ -1,13 +1,11 @@
-"use client"
+"use client";
 
-import React, {useState} from "react";
-import {ToastContainer, toast} from "react-toastify";
+import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -16,20 +14,12 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { request } from "@/server/request";
-import Cookies from "js-cookie";
-
-import useAuth from "@/store/auth";
-import { USER_DATA, USER_TOKEN } from "@/constants";
-import { useRouter } from 'next/navigation'
-
-
+import { useRouter } from "next/navigation";
 
 const defaultTheme = createTheme();
 
-export default function LoginForm() {
-  const {setIsAuthenticated} = useAuth();
+export default function RegisterForm() {
   const router = useRouter();
-  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -37,18 +27,17 @@ export default function LoginForm() {
     try {
       setLoading(true);
       const data = new FormData(event.currentTarget);
-      const userData =  {
+      const userData = {
+        firstName: data.get("firstName"),
+        lastName: data.get("lastName"),
         username: data.get("username"),
+        phoneNumber: data.get("phoneNumber"),
         password: data.get("password"),
-      }
+      };
 
-      const {data: {accesstoken, user}} = await request.post("auth/login", userData);
-      toast.success("You are logged in !");
-      setIsAuthenticated(user);
-      localStorage.setItem(USER_DATA, JSON.stringify(user))
-      Cookies.set(USER_TOKEN, accesstoken);
-      request.defaults.headers.Authorization = `Bearer ${accesstoken}`;
-      router.push("/")
+      await request.post("auth/register", userData);
+      toast.success("You are registered !");
+      router.push("/login");
     } finally {
       setLoading(false);
     }
@@ -56,7 +45,7 @@ export default function LoginForm() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <ToastContainer/>
+      <ToastContainer />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -71,7 +60,7 @@ export default function LoginForm() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign up
           </Typography>
           <Box
             component="form"
@@ -79,6 +68,26 @@ export default function LoginForm() {
             noValidate
             sx={{ mt: 1 }}
           >
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="firstName"
+              label="Firstname"
+              name="firstName"
+              autoComplete="firstName"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="lastName"
+              label="Lastname"
+              name="lastName"
+              autoComplete="lastName"
+              autoFocus
+            />
             <TextField
               margin="normal"
               required
@@ -93,15 +102,21 @@ export default function LoginForm() {
               margin="normal"
               required
               fullWidth
+              id="phoneNumber"
+              label="Phone number"
+              name="phoneNumber"
+              autoComplete="phoneNumber"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
               name="password"
               label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
             <Button
               type="submit"
@@ -109,7 +124,7 @@ export default function LoginForm() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Register
             </Button>
             <Grid container>
               <Grid item xs>
@@ -118,8 +133,8 @@ export default function LoginForm() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/register" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="/login" variant="body2">
+                  {"Already have an account? Sign in"}
                 </Link>
               </Grid>
             </Grid>

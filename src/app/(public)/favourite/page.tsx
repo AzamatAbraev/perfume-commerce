@@ -1,4 +1,6 @@
 import { Metadata } from "next";
+import FavouriteCard from "@/components/card/FavouriteCard";
+
 import "./style.scss";
 
 export const metadata: Metadata = {
@@ -8,7 +10,12 @@ export const metadata: Metadata = {
 };
 
 const FavouritePage = () => {
-  return <div>FavouritePage</div>;
+  
+  return <section>
+    <div className="container">
+      <FavouriteCard/>
+    </div>
+  </section>;
 };
 
 export default FavouritePage;

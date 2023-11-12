@@ -61,6 +61,17 @@ header {
     color: vrb.$secondary !important;
     width: 100px;
   }
+
+  &__register__btn {
+    padding: 10px 20px;
+    border: 1px solid #000;
+    border: none;
+    border-radius: 6px;
+    background-color: #fff;
+    color: vrb.$secondary !important;
+    font-size: 16px;
+    opacity: 0.8;
+  }
 }
 
 .hamburger {

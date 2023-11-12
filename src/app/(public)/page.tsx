@@ -1,8 +1,9 @@
 import CategoryRow from "@/components/card/CategoryCard";
 import Carousel from "@/components/slider/Slider";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import "@/general-styles/public-home.scss";
 import Link from "next/link";
+
+import "@/general-styles/public-home.scss";
 
 export default function Home() {
   return (

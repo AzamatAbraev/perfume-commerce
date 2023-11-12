@@ -4,6 +4,7 @@ import ProductCard from "@/components/card/ProductCard";
 import ProductType from "@/types/product";
 
 import "./style.scss";
+import { request } from '@/server/request';
 
 export const metadata: Metadata = {
   title: "Vodiy perfume | Products",
@@ -16,7 +17,7 @@ const AllProductsPage = async() => {
   return (
     <section className="all-products">
       <div className="container products__container">
-        <h1 className="allproducts__title">Products</h1>
+        <h1 className="allproducts__title">Products ()</h1>
         <ProductCard/>
       </div>
     </section>

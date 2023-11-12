@@ -7,19 +7,38 @@ import Image from "next/image";
 import Link from "next/link";
 import FavoriteBorderIconOutlined from "@mui/icons-material/FavoriteBorderOutlined";
 import useCart from "@/store/cart";
+import useFav from "@/store/fav";
 
 import "./style.scss";
+import Loading from "../loading/Loading";
 
 const Carousel = () => {
   const { data: latestProducts, getData: getLatestProducts } =
     useLatestProducts();
 
   const {addToCart} = useCart();
+  const {cart, addToFav} = useFav();
 
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+      setIsLoading(true);
+      const timerId = setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+
+      return () => {
+        clearTimeout(timerId);
+      };
+    }, []);
 
   useEffect(() => {
     getLatestProducts();
   }, [getLatestProducts]);
+
+  const isProductInFav = (productId: string) => {
+    return cart.some((cartProduct) => cartProduct.id === productId);
+  };
 
 
 
@@ -61,6 +80,7 @@ const Carousel = () => {
   };
   return (
     <div>
+      {isLoading ? <Loading/> : 
       <Slider {...settings}>
         {latestProducts?.map((product) => (
           <div className="product__border" key={product?._id}>
@@ -75,7 +95,12 @@ const Carousel = () => {
                   fill
                   objectFit="cover"
                 />
-                <button className="favourite__btn">
+                <button onClick={() => addToFav(product?._id,
+                    product?.image.url,
+                    product?.title,
+                    product?.description,
+                    product?.price)} className={`favourite__btn ${isProductInFav(product?._id) ? 'in-fav' : ''
+                  }`}>
                   <FavoriteBorderIconOutlined />
                 </button>
               </div>
@@ -107,7 +132,7 @@ const Carousel = () => {
             </div>
           </div>
         ))}
-      </Slider>
+      </Slider>}
     </div>
   );
 };
