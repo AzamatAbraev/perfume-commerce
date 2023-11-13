@@ -1,20 +1,25 @@
 "use client"
 
+import {Fragment} from "react";
 import useFav from "@/store/fav";
-import "./style.scss";
 import Image from "next/image";
 import FavType from "@/types/fav";
+import useCart from "@/store/cart";
+
+// import "./style.scss";
+import "./FavCart.scss";
 
 
 const FavouriteCard = () => {
-  const { cart, setCart } = useFav();
+  const { cart, setCart, removeFromCart } = useFav();
 
   let newCart: (FavType | null)[] = cart.map((product: FavType) => ({
     ...product,
   }));
 
   return (
-    <div className="cart__row">
+    <Fragment>
+   {cart?.length !== 0 ? <div className="cart__row">
       {newCart?.map((product) => (
         <div key={product?.id} className="cart__card">
           <div className="cart__image">
@@ -34,10 +39,19 @@ const FavouriteCard = () => {
             <p>
               Price: {product?.price || "Mavjud emas"}UZS
             </p>
+            <button className="remove__fav__btn" onClick={() => removeFromCart(product?.id)}>
+              Remove
+            </button>
           </div>
         </div>
       ))}
-    </div>
+    </div> : (
+    <div className="nodata__found">
+      <h1>
+        No data found...
+      </h1>
+    </div>)}
+    </Fragment>
   );
 };
 

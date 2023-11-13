@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
-import { ChildrenType } from "@/types/children";
 import {ToastContainer} from "react-toastify";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+
+import { ChildrenType } from "@/types/children";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -21,7 +22,7 @@ export default function RootLayout({ children }: ChildrenType) {
   return (
     <html suppressHydrationWarning={true} lang="en">
       <body className={jakarta.className}>
-        <ToastContainer/>
+        <ToastContainer autoClose={1000} />
         {children}
         </body>
     </html>

@@ -1,0 +1,56 @@
+@use "@/general-styles/variables.scss" as vrb;
+
+.cart__image {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+.cart__card {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  margin-bottom: 50px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.cart__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.remove__fav__btn {
+  width: 50%;
+  padding: 10px 20px;
+  margin-top: 20px;
+  font-size: 16px;
+  background-color: vrb.$secondary;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid vrb.$secondary;
+}
+
+.nodata__found {
+  height: 45vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 700px) {
+
+  .cart__card {
+    grid-template-columns: 1fr;
+  }
+
+  .remove__fav__btn {
+    width: 100%;
+  }
+}

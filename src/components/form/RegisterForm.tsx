@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -45,7 +45,6 @@ export default function RegisterForm() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <ToastContainer />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box

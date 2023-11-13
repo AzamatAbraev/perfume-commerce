@@ -41,7 +41,7 @@ const Carousel = () => {
     return favCart.some((favCartProduct) => favCartProduct.id === productId);
   };
 
-   const isProductInCart = (productId: string) => {
+  const isProductInCart = (productId: string) => {
     return cart.some((cartProduct) => cartProduct.id === productId);
   };
 
@@ -99,10 +99,10 @@ const Carousel = () => {
                   objectFit="cover"
                 />
                 <button onClick={() => addToFav(product?._id,
-                    product?.image.url,
-                    product?.title,
-                    product?.description,
-                    product?.price)} className="favourite__btn">
+                  product?.image.url,
+                  product?.title,
+                  product?.description,
+                  product?.price)} className="favourite__btn">
                   {isProductInFav(product?._id) ? <FavoriteIcon /> : <FavoriteBorderIconOutlined /> }
                 </button>
               </div>
@@ -126,7 +126,7 @@ const Carousel = () => {
                       product?.price,
                     )
                   }
-                  className="product__btn" disabled={isProductInCart(product?._id) ? true : false} 
+                  className={isProductInCart(product?._id) ? "in-cart" : "product__btn"} disabled={isProductInCart(product?._id) || product?._id === null ? true : false} 
                 >
                   {isProductInCart(product?._id) ? "Added" : "Add to cart"  }
                 </button>

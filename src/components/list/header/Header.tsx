@@ -1,20 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import {toast} from "react-toastify";
 import Link from "next/link";
-
 import useScreenSize from "@/utils/useScreen";
+import {useRouter} from "next/navigation";
+import Cookies from "js-cookie";
+
+import useCart from "@/store/cart";
+import useFav from "@/store/fav";
+import useAuth from "@/store/auth";
 
 import ShoppingCartIconOutlined from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import Badge from "@mui/material/Badge";
-import useCart from "@/store/cart";
-import useFav from "@/store/fav";
-import useAuth from "@/store/auth";
-import Cookies from "js-cookie";
-import {useRouter} from "next/navigation";
+
 import { USER_DATA, USER_TOKEN } from "@/constants";
 
 
@@ -43,7 +45,8 @@ const Header = () => {
   const logout = () => {
     localStorage.removeItem(USER_DATA);
     Cookies.remove(USER_TOKEN);
-    setIsAuthenticated(user)
+    setIsAuthenticated(user);
+    toast.info("You are logged out")
     router.push("/")
   }
 

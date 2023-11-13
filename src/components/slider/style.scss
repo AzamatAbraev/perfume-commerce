@@ -13,8 +13,10 @@
 }
 
 .in-fav {
-  background-color: red !important;
+  background-color: red;
 }
+
+
 
 .product__border {
   padding-bottom: 20px;
@@ -54,6 +56,16 @@
   color: #fff;
   border-radius: 5px;
   border: 1px solid vrb.$secondary;
+}
+
+.in-cart {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid vrb.$secondary;
+  background-color: #fff;
+  color: vrb.$secondary;
 }
 
 .button__wrapper {

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+
 import FavouriteCard from "@/components/card/FavouriteCard";
 
 import "./style.scss";

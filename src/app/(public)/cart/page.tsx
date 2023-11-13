@@ -1,6 +1,8 @@
 import { Metadata } from "next";
-import "./style.scss";
+
 import CartCard from "@/components/card/CartCard";
+
+import "./style.scss";
 
 export const metadata: Metadata = {
   title: "Vodiy perfume | Cart",

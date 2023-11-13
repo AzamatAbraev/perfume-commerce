@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+
 import AccountForm from "@/components/form/AccountForm";
 
 import "./style.scss";

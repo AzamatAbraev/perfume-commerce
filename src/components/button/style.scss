@@ -1,0 +1,21 @@
+@use "@/general-styles/variables.scss" as vrb;
+
+.add__btn {
+  width: 60%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: vrb.$secondary;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid vrb.$secondary;
+}
+
+.add-in-cart {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid vrb.$secondary;
+  background-color: #fff;
+  color: vrb.$secondary;
+}

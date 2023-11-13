@@ -30,6 +30,7 @@ const useCart = create<LatestType>()((set, get) => ({
   quantity: 1,
   data: [],
   cart,
+
   getData: async () => {
     try {
       set({ loading: true });
@@ -40,20 +41,26 @@ const useCart = create<LatestType>()((set, get) => ({
     }
   },
 
-  addToCart: async (id, image, title, description, price) => {
+  addToCart: (id, image, title, description, price) => {
     const { cart } = get();
     const values = {
-      id,
+      id: id || Date.now().toString(),
       image,
       title,
       description,
       price,
       quantity: 1,
     };
-    cart.push(values);
-    set({cart})
-    localStorage.setItem(CART, JSON.stringify(cart));
+
+    const itemInCart = cart.find((item) => item.id === id);
+
+    if (!itemInCart) {
+      cart.push(values);
+      set({cart})
+      localStorage.setItem(CART, JSON.stringify(cart));
+    }
   },
+
   setCart: (newCart: CartType[]) => {
     set({ cart: newCart })
     localStorage.setItem(CART, JSON.stringify(get().cart));

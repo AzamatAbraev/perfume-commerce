@@ -26,5 +26,21 @@
   }
 }
 
+.slick-prev, .slick-next {
+  display: none !important;
+}
+
+@media (max-width: 500px) {
+  .home__categories__header {
+    h1 {
+      font-size: 30px !important;
+    }
+
+    a {
+      font-size: 18px;
+    }
+  }
+}
+
 
 

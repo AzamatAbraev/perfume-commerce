@@ -1,8 +1,9 @@
 "use client"
 
-import useCart from "@/store/cart";
+import React, {useState, useEffect, Fragment} from "react";
 import Image from "next/image";
-import React, {useState, useEffect} from "react";
+
+import useCart from "@/store/cart";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import CartType from "@/types/cart";
@@ -64,46 +65,52 @@ const CartCard = () => {
 
 
   return (
-    <div className="cart__row">
-      {newCart?.map((product) => (
-        <div key={product?.id} className="cart__card">
-          <div className="cart__image">
-            <Image
-              src={
-                product?.image ||
-                "https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"
-              }
-              alt={product?.title || "Uknown"}
-              fill
-              objectFit="contain"
-            />
-          </div>
-          <div className="cart__content">
-            <h3>Name: {product?.title || "Mahsulot"}</h3>
-            <p>Description: {product?.description || "Mavjud emas"}</p>
-            <p>Quantity: {product?.quantity || 0}</p>
-            <p>
-              Price: {product ? product?.price * product?.quantity : "Mavjud emas"}UZS
-            </p>
-            <div className="cart__button__container">
-              <button onClick={() => decreaseQuantity(product?.id || "id1")}>
-                <RemoveIcon />
-              </button>
-              <span>{product?.quantity || 0}</span>
-              <button onClick={() => increaseQuantity(product?.id || "id")}>
-                <AddIcon />
-              </button>
+    <Fragment>
+      {cart.length !== 0 ? <div className="cart__row">
+        {newCart?.map((product) => (
+          <div key={product?.id} className="cart__card">
+            <div className="cart__image">
+              <Image
+                src={
+                  product?.image ||
+                  "https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"
+                }
+                alt={product?.title || "Uknown"}
+                fill
+                objectFit="contain"
+              />
+            </div>
+            <div className="cart__content">
+              <h3>Name: {product?.title || "Mahsulot"}</h3>
+              <p>Description: {product?.description || "Mavjud emas"}</p>
+              <p>Quantity: {product?.quantity || 0}</p>
+              <p>
+                Price: {product ? product?.price * product?.quantity : "Mavjud emas"}UZS
+              </p>
+              <div className="cart__button__container">
+                <button onClick={() => decreaseQuantity(product?.id || "id1")}>
+                  <RemoveIcon />
+                </button>
+                <span>{product?.quantity || 0}</span>
+                <button onClick={() => increaseQuantity(product?.id || "id")}>
+                  <AddIcon />
+                </button>
+              </div>
             </div>
           </div>
+        ))}
+        <div className="cart__order">
+          <h3>Total Amount: {totalPrice} UZS </h3>
+          <button>Order</button>
         </div>
-      ))}
-      <div className="cart__order">
-        <h3>Total Amount: {totalPrice} UZS </h3>
-        <button>Order</button>
-      </div>
-    </div>
+      </div> : (
+      <div className="nodata__found">
+        <h1>
+          No data found...
+        </h1>
+      </div>)}
+    </Fragment>
   );
 };
 
-// Export the CartCard component
 export default CartCard;

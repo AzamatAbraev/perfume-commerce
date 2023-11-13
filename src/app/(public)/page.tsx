@@ -1,9 +1,13 @@
-import CategoryRow from "@/components/card/CategoryCard";
 import Carousel from "@/components/slider/Slider";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Link from "next/link";
+import Cookies from "js-cookie";
+
+import CategoryRow from "@/components/card/CategoryCard";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 import "@/general-styles/public-home.scss";
+import { USER_TOKEN } from "@/constants";
+import { redirect } from "next/navigation";
 
 export default function Home() {
   return (

@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+
 import "./style.scss";
 
 export const metadata: Metadata = {

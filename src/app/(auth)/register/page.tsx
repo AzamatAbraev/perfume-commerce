@@ -1,5 +1,6 @@
-import RegisterForm from "@/components/form/RegisterForm";
 import { Metadata } from "next";
+
+import RegisterForm from "@/components/form/RegisterForm";
 
 export const metadata: Metadata = {
   title: "Vodiy perfume | Register",

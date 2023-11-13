@@ -1,10 +1,11 @@
 "use client";
 
-import { CART } from "@/constants";
+import { create } from "zustand";
+
 import { request } from "@/server/request";
 import FavType from "@/types/fav";
 import CategoryType from "@/types/category";
-import { create } from "zustand";
+import { FAV } from "@/constants";
 
 interface FavouriteProducts {
   loading: boolean;
@@ -20,10 +21,11 @@ interface FavouriteProducts {
     price: number
   ) => void;
   setCart: (newCart: FavType[]) => void;
+  removeFromCart: (id: string | undefined) => void;
 }
 
 const productJson =
-  typeof window !== "undefined" ? localStorage.getItem("FAV") : false;
+  typeof window !== "undefined" ? localStorage.getItem(FAV) : false;
 const cart = productJson ? JSON.parse(productJson) : [];
 
 const useFav = create<FavouriteProducts>()((set, get) => ({
@@ -31,6 +33,7 @@ const useFav = create<FavouriteProducts>()((set, get) => ({
   data: [],
   liked: false,
   cart,
+
   getData: async () => {
     try {
       set({ loading: true });
@@ -39,6 +42,13 @@ const useFav = create<FavouriteProducts>()((set, get) => ({
     } finally {
       set({ loading: true });
     }
+  },
+
+  removeFromCart: async (id) => {
+    const {cart, setCart} = get();
+    const newCart = cart.filter((product) => product.id !== id)
+    set({cart: newCart})
+    localStorage.setItem(FAV, JSON.stringify(newCart))
   },
 
   addToFav: async (id, image, title, description, price) => {
@@ -51,13 +61,17 @@ const useFav = create<FavouriteProducts>()((set, get) => ({
       price,
       liked: false,
     };
-    cart.push(values);
-    set({ cart });
-    localStorage.setItem("FAV", JSON.stringify(cart));
+    const itemInCart = cart.find((item) => item.id === id);
+
+    if (!itemInCart) {
+      cart.push(values);
+      set({ cart });
+      localStorage.setItem(FAV, JSON.stringify(cart));
+    }
   },
   setCart: (newCart: FavType[]) => {
     set({ cart: newCart });
-    localStorage.setItem(CART, JSON.stringify(get().cart));
+    localStorage.setItem(FAV, JSON.stringify(get().cart));
   },
 }));
 
