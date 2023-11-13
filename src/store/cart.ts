@@ -44,7 +44,7 @@ const useCart = create<LatestType>()((set, get) => ({
   addToCart: (id, image, title, description, price) => {
     const { cart } = get();
     const values = {
-      id: id || Date.now().toString(),
+      id: id || id + 1,
       image,
       title,
       description,

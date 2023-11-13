@@ -17,7 +17,7 @@ import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import Badge from "@mui/material/Badge";
 
-import { USER_DATA, USER_TOKEN } from "@/constants";
+import { CART, FAV, USER_DATA, USER_TOKEN } from "@/constants";
 
 
 import "./style.scss";
@@ -25,6 +25,9 @@ import "./style.scss";
 const Header = () => {
   const screenSize = useScreenSize();
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [totalCart, setTotalCart] = useState(0);
+  const [totalFav, setTotalFav] = useState(0);
+  
 
   const { cart } = useCart();
   const { cart: favCart } = useFav();
@@ -50,6 +53,11 @@ const Header = () => {
     router.push("/")
   }
 
+  useEffect(() => {
+    setTotalCart(cart.length);
+    setTotalFav(favCart.length)
+  }, [cart.length, favCart.length])
+
   return (
     <header>
       <nav className="nav">
@@ -66,7 +74,7 @@ const Header = () => {
             </li>
             <li className="nav__item">
               <Link className="nav__cart" href="/favourite">
-                <Badge badgeContent={favCart.length} color="secondary">
+                <Badge badgeContent={totalFav} color="secondary">
                     <FavoriteBorderOutlinedIcon />
                 </Badge>
                 <p>Favourite</p>
@@ -74,7 +82,7 @@ const Header = () => {
             </li>
             <li className="nav__item">
               <Link className="nav__cart" href="/cart">
-                <Badge badgeContent={cart.length} color="secondary">
+                <Badge badgeContent={totalCart} color="secondary">
                   <ShoppingCartIconOutlined />
                 </Badge>
                 <p>My Cart </p>
@@ -109,7 +117,7 @@ const Header = () => {
               </li>
               <li className="nav__item">
                 <Link className="nav__cart" href="/favourite">
-                  <Badge badgeContent={favCart.length} color="secondary">
+                  <Badge badgeContent={totalFav} color="secondary">
                     <FavoriteBorderOutlinedIcon />
                   </Badge>
                   <p>Favourite</p>
@@ -117,7 +125,7 @@ const Header = () => {
               </li>
               <li className="nav__item">
                 <Link className="nav__cart" href="/cart">
-                  <Badge badgeContent={cart.length} color="secondary">
+                  <Badge badgeContent={totalCart} color="secondary">
                     <ShoppingCartIconOutlined />
                   </Badge>
                   <p>My Cart</p>

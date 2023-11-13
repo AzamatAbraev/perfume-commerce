@@ -18,9 +18,10 @@ export const metadata: Metadata = {
     "Vodiy perfume is an e-commerce site developed by Azamat Abraev, a softwaree engineer based in Tashkent, Uzbekistan",
 };
 
+
 export default function RootLayout({ children }: ChildrenType) {
   return (
-    <html suppressHydrationWarning={true} lang="en">
+    <html lang="en">
       <body className={jakarta.className}>
         <ToastContainer autoClose={1000} />
         {children}
