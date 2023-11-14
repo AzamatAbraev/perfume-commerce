@@ -22,26 +22,29 @@
   gap: 10px;
 }
 
-.add__remove__btn {
-  display: flex;
-  gap: 10px;
+  .add__remove__btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
-.remove__fav__btn {
-  padding: 5px 10px;
-  margin-top: 10px;
-  font-size: 16px;
-  background-color: vrb.$secondary;
-  color: #fff;
-  border-radius: 5px;
-  border: 1px solid transparent;
-}
+  .remove__fav__btn {
+    padding: 5px 10px;
+    text-align: center;
+    width: 50px !important;
+    margin-top: 10px;
+    font-size: 16px;
+    background-color: vrb.$secondary;
+    color: #fff;
+    border-radius: 5px;
+    border: 1px solid transparent;
+  }
 
-.add {
-  background-color: green;
-}
-.remove {
-  background-color: red;
-}
+  .add {
+    background-color: green;
+  }
+  .remove {
+    background-color: red;
+  }
 } 
 
 .nodata__found {

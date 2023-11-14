@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect } from "react";
 
 function protectedPage<P>(Component: React.ComponentType<P>){
-  const AuthComponent = (props: P) => {
+  const AuthComponent = (props: P & JSX.IntrinsicAttributes) => {
     const {isAuthenticated, user} = useAuth();
     const router = useRouter();
     const pathname = usePathname();
