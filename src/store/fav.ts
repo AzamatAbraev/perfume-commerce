@@ -61,15 +61,14 @@ const useFav = create<FavouriteProducts>()((set, get) => ({
       price,
       liked: false,
     };
-    const itemInCart = cart.find((item) => item.id === id);
+    const itemIndex = cart.findIndex((item) => item.id === id);
 
-    if (!itemInCart) {
+    if (itemIndex === -1) {
       cart.push(values);
-      set({ cart });
     } else {
-      cart.splice(values, 1);
-      set({cart})
+      cart.splice(itemIndex, 1);
     }
+    set({cart})
     localStorage.setItem(FAV, JSON.stringify(cart));
   },
   setCart: (newCart: FavType[]) => {

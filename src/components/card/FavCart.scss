@@ -22,16 +22,27 @@
   gap: 10px;
 }
 
+.add__remove__btn {
+  display: flex;
+  gap: 10px;
+
 .remove__fav__btn {
-  width: 50%;
-  padding: 10px 20px;
-  margin-top: 20px;
+  padding: 5px 10px;
+  margin-top: 10px;
   font-size: 16px;
   background-color: vrb.$secondary;
   color: #fff;
   border-radius: 5px;
-  border: 1px solid vrb.$secondary;
+  border: 1px solid transparent;
 }
+
+.add {
+  background-color: green;
+}
+.remove {
+  background-color: red;
+}
+} 
 
 .nodata__found {
   height: 45vh;

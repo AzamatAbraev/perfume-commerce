@@ -1,5 +1,8 @@
+"use client"
+
 import React, { Fragment } from "react";
 import { ChildrenType } from "@/types/children";
+import protectedPage from "@/hoc/with-auth";
 
 const AdminLayout = ({ children }: ChildrenType) => {
   return (
@@ -11,4 +14,4 @@ const AdminLayout = ({ children }: ChildrenType) => {
   );
 };
 
-export default AdminLayout;
+export default protectedPage(AdminLayout);

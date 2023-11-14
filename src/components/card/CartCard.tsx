@@ -1,16 +1,25 @@
 "use client"
 
 import React, {useState, useEffect, Fragment} from "react";
-import Image from "next/image";
-
 import useCart from "@/store/cart";
+
+import Image from "next/image";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+
 import CartType from "@/types/cart";
 
 import "./style.scss";
 
 const CartCard = () => {
+  const [open, setOpen] = useState(false);
+  const [agree, setAgree] = useState(false);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const { cart, setCart } = useCart();
 
@@ -39,6 +48,7 @@ const CartCard = () => {
       if (product?.id === id) {
         const newQuantity = Math.max((product.quantity || 0) - 1, 0);
         if (newQuantity === 0) {
+          setOpen(true);
           return null;
         } else {
           return {
@@ -63,8 +73,42 @@ const CartCard = () => {
     setTotalPrice(newTotalPrice);
   }, [newCart]);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOk = () => {
+    setAgree(true);
+    setAgree(true);
+  }
+
   return (
     <Fragment>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          Product Confirmation
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Do you want to delete the product ?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleOk} autoFocus>
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
       {cart.length !== 0 ? <div className="cart__row">
         {newCart?.map((product) => (
           <div key={product?.id} className="cart__card">

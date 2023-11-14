@@ -1,14 +1,10 @@
 import { Metadata } from "next";
+"use client";
 
 import AccountForm from "@/components/form/AccountForm";
 
 import "./style.scss";
-
-export const metadata: Metadata = {
-  title: "Vodiy perfume | Account",
-  description:
-    "Vodiy perfume is an e-commerce site developed by Azamat Abraev, a softwaree engineer based in Tashkent, Uzbekistan",
-};
+import protectedPage from "@/hoc/with-auth";
 
 const AccountPage = () => {
   return <section className="accountpage">
@@ -16,4 +12,4 @@ const AccountPage = () => {
   </section>;
 };
 
-export default AccountPage;
+export default protectedPage(AccountPage);

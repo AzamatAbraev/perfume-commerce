@@ -52,16 +52,14 @@ const useCart = create<LatestType>()((set, get) => ({
       quantity: 1,
     };
 
-    const itemInCart = cart.find((item) => item.id === id);
+    const itemIndex = cart.findIndex((item) => item.id === id);
 
-    if (!itemInCart) {
+    if (itemIndex === -1) {
       cart.push(values);
-      set({cart})
     } else {
-      cart.splice(values, 1);
-      set({cart})
+      cart.splice(itemIndex, 1);
     }
-    
+    set({cart})
     localStorage.setItem(CART, JSON.stringify(cart));
     
   },

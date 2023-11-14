@@ -21,6 +21,7 @@ import Cookies from "js-cookie";
 import useAuth from "@/store/auth";
 import { USER_DATA, USER_TOKEN } from "@/constants";
 import { useRouter } from 'next/navigation'
+import ROLES from "@/types/roles";
 
 
 
@@ -48,7 +49,11 @@ export default function LoginForm() {
       localStorage.setItem(USER_DATA, JSON.stringify(user))
       Cookies.set(USER_TOKEN, accesstoken);
       request.defaults.headers.Authorization = `Bearer ${accesstoken}`;
-      router.push("/")
+      if (user.role === ROLES.ADMIN) {
+        router.push("/admin")
+      } else {
+        router.push("/")
+      }
     } finally {
       setLoading(false);
     }
