@@ -11,4 +11,6 @@ const AccountPage = () => {
   </section>;
 };
 
-export default protectedPage(AccountPage);
+const WrappedComponent = protectedPage(AccountPage);
+
+export default WrappedComponent;
