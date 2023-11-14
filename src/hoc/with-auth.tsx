@@ -1,13 +1,12 @@
 "use client"
-
 import React from "react";
 import useAuth from "@/store/auth"
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { useEffect } from "react";
 
-function protectedPage<P extends React.JSX.IntrinsicAttributes>(Component: React.ComponentType<P>): React.ComponentType<P & { children: React.ReactNode }> {
-  const AuthComponent = (props: P & { children: React.ReactNode }) => {
+function protectedPage<P extends React.JSX.IntrinsicAttributes>(Component: React.ComponentType<P>){
+  const AuthComponent = (props: P) => {
     const {isAuthenticated, user} = useAuth();
     const router = useRouter();
     const pathname = usePathname();

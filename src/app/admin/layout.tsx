@@ -1,10 +1,23 @@
 "use client"
 
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { ChildrenType } from "@/types/children";
-import protectedPage from "@/hoc/with-auth";
+import { useRouter } from 'next/navigation';
+import useAuth from "@/store/auth";
 
 const AdminLayout = ({ children }: ChildrenType) => {
+  const { isAuthenticated, user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (user?.role !== 1) {
+        router.push("/")
+      }
+    } else {
+      router.push("/login")
+    }
+  }, [isAuthenticated, router, user?.role])
   return (
     <Fragment>
       <header>Admin Header</header>
