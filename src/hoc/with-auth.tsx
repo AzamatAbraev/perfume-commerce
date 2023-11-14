@@ -1,11 +1,12 @@
+
+import React from "react";
 import useAuth from "@/store/auth"
-import ROLES from "@/types/roles";
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { useEffect } from "react";
 
 function protectedPage<P>(Component: React.ComponentType<P>){
-  const AuthComponent = (props: P & JSX.IntrinsicAttributes) => {
+  const AuthComponent = (props: P & React.JSX.IntrinsicAttributes) => {
     const {isAuthenticated, user} = useAuth();
     const router = useRouter();
     const pathname = usePathname();
