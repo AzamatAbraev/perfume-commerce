@@ -14,6 +14,4 @@ const AdminLayout = ({ children }: ChildrenType) => {
   );
 };
 
-const WrappedComponentLayout = protectedPage(AdminLayout);
-
-export default WrappedComponentLayout;
+export default AdminLayout;
