@@ -27,6 +27,7 @@ const Header = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [totalCart, setTotalCart] = useState(0);
   const [totalFav, setTotalFav] = useState(0);
+  const [authenticated, setAuthenticated] = useState<boolean>(false);
   
 
   const { cart } = useCart();
@@ -56,7 +57,8 @@ const Header = () => {
   useEffect(() => {
     setTotalCart(cart.length);
     setTotalFav(favCart.length)
-  }, [cart.length, favCart.length])
+    setAuthenticated(isAuthenticated)
+  }, [cart.length, favCart.length, isAuthenticated])
 
   return (
     <header>
@@ -88,7 +90,7 @@ const Header = () => {
                 <p>My Cart </p>
               </Link>
             </li>
-             {isAuthenticated ? (<li className="nav__item">
+             {authenticated ? (<li className="nav__item">
                 <Link className="nav__login" href="/account">
                   {user?.firstName}
                 </Link>
@@ -97,7 +99,7 @@ const Header = () => {
                   Login
                 </Link>
               </li>)}
-              {isAuthenticated ? (<li className="nav__item">
+              {authenticated ? (<li className="nav__item">
                 <button onClick={logout} className="nav__register__btn">
                   Logout
                 </button>
@@ -131,7 +133,7 @@ const Header = () => {
                   <p>My Cart</p>
                 </Link>
               </li>
-              {isAuthenticated ? (<li className="nav__item">
+              {authenticated ? (<li className="nav__item">
                 <Link className="nav__login" href="/account">
                   {user?.firstName}
                 </Link>
@@ -140,7 +142,7 @@ const Header = () => {
                   Login
                 </Link>
               </li>)}
-              {isAuthenticated ? (<li className="nav__item">
+              {authenticated ? (<li className="nav__item">
                 <button onClick={logout} className="nav__register__btn">
                   Logout
                 </button>

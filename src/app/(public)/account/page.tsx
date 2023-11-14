@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 };
 
 const AccountPage = () => {
-  return <div>
+  return <section className="accountpage">
     <AccountForm/>
-  </div>;
+  </section>;
 };
 
 export default AccountPage;

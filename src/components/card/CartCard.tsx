@@ -11,12 +11,13 @@ import CartType from "@/types/cart";
 import "./style.scss";
 
 const CartCard = () => {
-    const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
   const { cart, setCart } = useCart();
 
   let newCart: (CartType | null)[] = cart.map((product: CartType) => ({
     ...product,
   }));
+
 
   const increaseQuantity = (id: string) => {
     newCart = newCart.map((product) => {
@@ -62,7 +63,6 @@ const CartCard = () => {
     }, 0);
     setTotalPrice(newTotalPrice);
   }, [newCart]);
-
 
   return (
     <Fragment>

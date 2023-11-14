@@ -125,9 +125,9 @@ const ProductCard = () => {
                 objectFit="cover"
               />
               <button onClick={() => addToFav(product?._id,
-                    product?.image.url,
-                    product?.title,
-                    product?.description,
+                product?.image.url,
+                product?.title,
+                product?.description,
                 product?.price)} className="favourite__btn">
                 {isProductInFav(product?._id) ? <FavoriteIcon /> : <FavoriteBorderIconOutlined />}
               </button>

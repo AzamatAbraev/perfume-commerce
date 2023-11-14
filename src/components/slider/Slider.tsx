@@ -126,7 +126,7 @@ const Carousel = () => {
                       product?.price,
                     )
                   }
-                  className={isProductInCart(product?._id) ? "in-cart" : "product__btn"} disabled={isProductInCart(product?._id) || product?._id === null ? true : false} 
+                  className={isProductInCart(product?._id) ? "in-cart" : "product__btn"}  
                 >
                   {isProductInCart(product?._id) ? "Added" : "Add to cart"  }
                 </button>

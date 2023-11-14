@@ -4,14 +4,14 @@ import {Fragment} from "react";
 import useFav from "@/store/fav";
 import Image from "next/image";
 import FavType from "@/types/fav";
-import useCart from "@/store/cart";
 
-// import "./style.scss";
 import "./FavCart.scss";
+import useCart from "@/store/cart";
 
 
 const FavouriteCard = () => {
-  const { cart, setCart, removeFromCart } = useFav();
+  const { cart, removeFromCart } = useFav();
+  const {addToCart} = useCart();
 
   let newCart: (FavType | null)[] = cart.map((product: FavType) => ({
     ...product,
@@ -39,6 +39,13 @@ const FavouriteCard = () => {
             <p>
               Price: {product?.price || "Mavjud emas"}UZS
             </p>
+            <button onClick={() => addToCart(product?.id!,
+              product?.image!,
+              product?.title!,
+              product?.description!,
+              product?.price!)}>
+                Add to cart
+            </button>
             <button className="remove__fav__btn" onClick={() => removeFromCart(product?.id)}>
               Remove
             </button>

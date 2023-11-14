@@ -3,8 +3,8 @@ interface CartType {
   image: string,
   title: string,
   description: string,
-  quantity: number,
   price: number,
+  quantity: number,
 }
 
 export default CartType;

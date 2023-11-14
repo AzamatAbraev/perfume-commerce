@@ -16,7 +16,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { request } from "@/server/request";
 import { useRouter } from "next/navigation";
 import { UserType } from "@/types/user";
-import 'react-toastify/dist/ReactToastify.css';
 
 const defaultTheme = createTheme();
 
@@ -63,7 +62,7 @@ export default function AccountForm() {
       };
 
       await request.put("auth/update", userData);
-      toast("Your information is saved successfully!");
+      toast.success("Your information is saved successfully!");
       router.push("/");
     } finally {
       setLoading(false);

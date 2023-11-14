@@ -14,11 +14,11 @@ interface FavouriteProducts {
   data: CategoryType[];
   getData: () => void;
   addToFav: (
-    id: string,
+    id: string | undefined,
     image: string,
     title: string,
     description: string,
-    price: number
+    price: number,
   ) => void;
   setCart: (newCart: FavType[]) => void;
   removeFromCart: (id: string | undefined) => void;
@@ -51,9 +51,9 @@ const useFav = create<FavouriteProducts>()((set, get) => ({
     localStorage.setItem(FAV, JSON.stringify(newCart))
   },
 
-  addToFav: async (id, image, title, description, price) => {
+  addToFav: async (id, image, title, description, price, quantity) => {
     const { cart } = get();
-    const values = {
+    const values: any = {
       id,
       image,
       title,
@@ -66,8 +66,11 @@ const useFav = create<FavouriteProducts>()((set, get) => ({
     if (!itemInCart) {
       cart.push(values);
       set({ cart });
-      localStorage.setItem(FAV, JSON.stringify(cart));
+    } else {
+      cart.splice(values, 1);
+      set({cart})
     }
+    localStorage.setItem(FAV, JSON.stringify(cart));
   },
   setCart: (newCart: FavType[]) => {
     set({ cart: newCart });

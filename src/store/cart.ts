@@ -17,7 +17,7 @@ interface LatestType {
     image: string,
     title: string,
     description: string,
-    price: number
+    price: number,
   ) => void;
   setCart: (newCart: CartType[]) => void;
 }
@@ -43,8 +43,8 @@ const useCart = create<LatestType>()((set, get) => ({
 
   addToCart: (id, image, title, description, price) => {
     const { cart } = get();
-    const values = {
-      id: id || id + 1,
+    const values: any = {
+      id: id || (id + 1),
       image,
       title,
       description,
@@ -57,8 +57,13 @@ const useCart = create<LatestType>()((set, get) => ({
     if (!itemInCart) {
       cart.push(values);
       set({cart})
-      localStorage.setItem(CART, JSON.stringify(cart));
+    } else {
+      cart.splice(values, 1);
+      set({cart})
     }
+    
+    localStorage.setItem(CART, JSON.stringify(cart));
+    
   },
 
   setCart: (newCart: CartType[]) => {
