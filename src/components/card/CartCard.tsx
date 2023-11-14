@@ -18,7 +18,6 @@ const CartCard = () => {
     ...product,
   }));
 
-
   const increaseQuantity = (id: string) => {
     newCart = newCart.map((product) => {
       if (product?.id === id) {

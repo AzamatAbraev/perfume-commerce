@@ -14,7 +14,7 @@ interface FavouriteProducts {
   data: CategoryType[];
   getData: () => void;
   addToFav: (
-    id: string | undefined,
+    id: string,
     image: string,
     title: string,
     description: string,
@@ -51,7 +51,7 @@ const useFav = create<FavouriteProducts>()((set, get) => ({
     localStorage.setItem(FAV, JSON.stringify(newCart))
   },
 
-  addToFav: async (id, image, title, description, price, quantity) => {
+  addToFav: async (id, image, title, description, price) => {
     const { cart } = get();
     const values: any = {
       id,
