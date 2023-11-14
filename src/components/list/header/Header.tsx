@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {toast} from "react-toastify";
 import Link from "next/link";
 import useScreenSize from "@/utils/useScreen";
 import {useRouter} from "next/navigation";
+import {toast} from "react-toastify";
 import Cookies from "js-cookie";
 
 import useCart from "@/store/cart";
@@ -17,7 +17,14 @@ import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import Badge from "@mui/material/Badge";
 
-import { CART, FAV, USER_DATA, USER_TOKEN } from "@/constants";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+
+import { USER_DATA, USER_TOKEN } from "@/constants";
 
 
 import "./style.scss";
@@ -28,7 +35,7 @@ const Header = () => {
   const [totalCart, setTotalCart] = useState(0);
   const [totalFav, setTotalFav] = useState(0);
   const [authenticated, setAuthenticated] = useState<boolean>(false);
-  
+  const [openModal, setOpenModal] = useState(false);
 
   const { cart } = useCart();
   const { cart: favCart } = useFav();
@@ -50,9 +57,18 @@ const Header = () => {
     localStorage.removeItem(USER_DATA);
     Cookies.remove(USER_TOKEN);
     setIsAuthenticated(user);
+    handleClose();
     toast.info("You are logged out")
     router.push("/")
   }
+
+  const handleClickOpen = () => {
+    setOpenModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
 
   useEffect(() => {
     setTotalCart(cart.length);
@@ -62,6 +78,27 @@ const Header = () => {
 
   return (
     <header>
+      <Dialog
+        open={openModal}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          Confirmation
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Do you want to log out ?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={logout} autoFocus>
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
       <nav className="nav">
         <div className="container nav__container">
           <div className="nav__logo">
@@ -100,7 +137,7 @@ const Header = () => {
                 </Link>
               </li>)}
               {authenticated ? (<li className="nav__item">
-                <button onClick={logout} className="nav__register__btn">
+                <button onClick={handleClickOpen} className="nav__register__btn">
                   Logout
                 </button>
               </li>) : (<li className="nav__item">

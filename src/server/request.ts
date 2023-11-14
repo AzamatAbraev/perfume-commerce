@@ -1,6 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import "react-toastify/dist/ReactToastify.css";
 
 import { USER_TOKEN } from "@/constants";
 
