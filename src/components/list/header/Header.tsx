@@ -37,9 +37,9 @@ const Header = () => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState(false);
 
+  const {isAuthenticated, user, setIsAuthenticated} = useAuth();
   const { cart } = useCart();
   const { cart: favCart } = useFav();
-  const {isAuthenticated, user, setIsAuthenticated} = useAuth();
 
   const router = useRouter();
 

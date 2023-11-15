@@ -12,15 +12,27 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
+import Cookies from 'js-cookie';
+
 
 import CartType from "@/types/cart";
 
 import "./style.scss";
+import useAuth from "@/store/auth";
+import { toast } from "react-toastify";
+import { USER_DATA, USER_TOKEN } from "@/constants";
+import { useRouter } from "next/navigation";
 
 const CartCard = () => {
   const [open, setOpen] = useState(false);
-  const [agree, setAgree] = useState(false);
   const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [openModal, setOpenModal] = useState(false);
+  const { isAuthenticated, user, setIsAuthenticated } = useAuth();
+
+  const router = useRouter();
+
+
+
   const { cart, setCart } = useCart();
 
   let newCart: (CartType | null)[] = cart.map((product: CartType) => ({
@@ -48,7 +60,6 @@ const CartCard = () => {
       if (product?.id === id) {
         const newQuantity = Math.max((product.quantity || 0) - 1, 0);
         if (newQuantity === 0) {
-          setOpen(true);
           return null;
         } else {
           return {
@@ -74,16 +85,15 @@ const CartCard = () => {
   }, [newCart]);
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpenModal(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpenModal(false);
   };
 
   const handleOk = () => {
-    setAgree(true);
-    setAgree(true);
+    
   }
 
   return (
@@ -104,7 +114,7 @@ const CartCard = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleOk} autoFocus>
+          <Button onClick={() => handleOk()} autoFocus>
             Ok
           </Button>
         </DialogActions>

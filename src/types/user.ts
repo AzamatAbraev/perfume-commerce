@@ -10,5 +10,6 @@ export interface UserType {
   lastName: string;
   username: string;
   phoneNumber: string;
+  password: string;
 }
 
