@@ -21,7 +21,7 @@ interface AllUsersType {
   users: UserType[],
 
   getUsers: (page?: number, search?: string) => void;
-  addUser: (user: NewUserType, selected: string) => void;
+  addUser: (user: NewUserType, selected: string | null) => void;
   editUser: (user: NewUserType, id: string) => void;
   deleteUser: (id: string) => void;
 }
