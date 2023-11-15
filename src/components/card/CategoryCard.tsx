@@ -20,7 +20,7 @@ const CategoryRow = () => {
       {categories?.map((category) => (
         <div key={category?._id} className="category__card">
           <div className="category__img">
-            <Image src={category?.image.url} alt={category?.name} fill />
+            <Image src={category?.image?.url || "https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"} alt={category?.name} fill />
           </div>
           <div className="category__content">
             <h3>{category?.name}</h3>
