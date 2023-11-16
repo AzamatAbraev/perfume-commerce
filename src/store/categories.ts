@@ -19,7 +19,7 @@ const useCategories = create<LatestType>()((set) => ({
       );
       set({ data: data });
     } finally {
-      set({ loading: true });
+      set({ loading: false });
     }
   },
 }));

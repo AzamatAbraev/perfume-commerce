@@ -1,7 +1,3 @@
-"use client";
-
-import {useEffect} from "react";
-import useUsers from "@/store/users"
 import GeneralTable from "@/components/table/Table"
 
 const UsersPage = () => {

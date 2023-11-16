@@ -47,6 +47,7 @@ const Header = () => {
     if (screenSize > 650) {
       setIsNavOpen(false);
     }
+
   }, [screenSize]);
 
   const controlNav = () => {

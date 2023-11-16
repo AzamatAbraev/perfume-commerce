@@ -38,6 +38,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 
+import useScreenSize from "@/utils/useScreen";
+
 
 
 const drawerWidth: number = 240;
@@ -93,6 +95,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const defaultTheme = createTheme();
 
 export default function Dashboard({ children }: ChildrenType) {
+  const screenSize = useScreenSize();
   const { isAuthenticated, user, setIsAuthenticated } = useAuth();
   const [open, setOpen] = useState(true);
   const router = useRouter();
@@ -107,6 +110,14 @@ export default function Dashboard({ children }: ChildrenType) {
       router.push("/login")
     }
   }, [isAuthenticated, router, user?.role])
+
+  useEffect(() => {
+    if (screenSize < 650) {
+      setOpen(false);
+    } else {
+      setOpen(true)
+    }
+  }, [screenSize])
   
   const toggleDrawer = () => {
     setOpen(!open);
