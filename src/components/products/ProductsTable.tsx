@@ -88,6 +88,8 @@ export default function ProductsTable() {
 
   const handleClickOpen = () => {
     setOpen(true);
+    setPhoto({public_id: "", url: ""});
+    setCategory("");
     setFormData({
       title: "",
       category: "",
@@ -113,6 +115,8 @@ export default function ProductsTable() {
     handleClickOpen();
     setSelected(id);
     const { data } = await request.get(`product/${id}`);
+    setCategory(data?.category?._id || ""); 
+    setPhoto({ public_id: data?.image.public_id, url: data?.image.url });
     setFormData({
       title: data?.title || "",
       category: data?.category._id || "",
@@ -131,8 +135,9 @@ export default function ProductsTable() {
   }, [])
 
   const sortByCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setCategory(event.target.value);
-    setPage(1);
+    const newCategory = event.target.value;
+    setCategory(newCategory);
+    setFormData({ ...formData, category: newCategory }); 
   };
 
   const uploadPhoto = async(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -246,7 +251,7 @@ export default function ProductsTable() {
                 onChange={(e) => handleInputChange("quantity", e.target.value)}
               />
             </div>
-            <select onChange={(event) => sortByCategory(event)} className="category-filter" style={{ height: "100%" }}>
+            <select onChange={(event) => sortByCategory(event)} value={category} className="category-filter" style={{ height: "100%" }}>
               <option value="" style={{ height: "100%" }}>
                 Category
               </option>
@@ -262,7 +267,7 @@ export default function ProductsTable() {
             </select>
             <input className="upload-photo" placeholder="Upload an image" onChange={uploadPhoto} type="file"/>
             {photo?.url ? <div className="upload-photo-container">
-              <Image alt="Image" fill src={photo?.url ||"https://www.junglescout.com/wp-content/uploads/2021/01/product-photo-water-bottle-hero.png"}/>
+              <Image alt="Image" fill src={photo?.url}/>
             </div> : null}
           </DialogContent>
           <DialogActions>

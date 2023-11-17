@@ -8,6 +8,8 @@ import useAuth from "@/store/auth";
 import {toast} from "react-toastify";
 import Cookies from "js-cookie";
 import { USER_DATA, USER_TOKEN } from "@/constants";
+import Link from 'next/link'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
@@ -217,6 +219,12 @@ export default function Dashboard({ children }: ChildrenType) {
           <List component="nav">
             {mainListItems}
             <Divider sx={{ my: 3 }} />
+            <Link className="dashboard-link" href="/account">
+              <ListItemIcon>
+                <AccountCircleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Account" />
+            </Link>
             <ListItemButton onClick={handleClickOpen}>
               <ListItemIcon>
                 <LogoutIcon />

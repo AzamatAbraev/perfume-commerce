@@ -14,7 +14,6 @@ import CategoryIcon from '@mui/icons-material/Category';
 
 import "@/general-styles/dashboard.scss";
 
-
 export const mainListItems = (
   <React.Fragment>
     <Link className="dashboard-link" href="/admin">

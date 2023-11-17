@@ -1,0 +1,61 @@
+@use "@/general-styles/variables.scss" as vrb;
+
+.profile {
+
+  &__main {
+    margin-top: 20px;
+    padding: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 10px;
+  }
+
+  &__header {
+    margin-bottom: 30px;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  &__input {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    label {
+      color: #111927;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #E5E7EB;
+      border-radius: 5px;
+      font-size: 16px;
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 1px hsla(220, 100%, 50%, 80%);
+      }
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+
+    button {
+      font-size: 16px;
+      padding: 6px 14px;
+      border-radius: 5px;
+      border: none;
+      background-color: vrb.$secondary;
+      color: #fff;
+    }
+  }
+}
