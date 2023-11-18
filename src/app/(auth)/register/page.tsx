@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import RegisterForm from "@/components/form/RegisterForm";
+import PublicRegisterForm from "@/components/form/NewRegisterForm";
 
 export const metadata: Metadata = {
   title: "Vodiy perfume | Register",
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 const RegisterPage = () => {
   return <div>
-    <RegisterForm/>
+    <PublicRegisterForm />
   </div>;
 };
 

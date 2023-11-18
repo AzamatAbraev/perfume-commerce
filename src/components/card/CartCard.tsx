@@ -26,6 +26,8 @@ const CartCard = () => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [needComments, setNeedComments] = useState(false);
+  const [comments, setComments] = useState("");
 
   const router = useRouter();
 
@@ -101,11 +103,11 @@ const CartCard = () => {
           product: product?.id,
           quantity: product?.quantity,
         })),
-        comment: "Urgent"
+        comment: comments,
       }
       await request.post("payment", order);
       localStorage.removeItem("CART");
-      router.push("/")
+      router.push("/");
       toast.success('Order created successfully!');
     } finally {
       setLoading(true)
@@ -170,6 +172,7 @@ const CartCard = () => {
         ))}
         <div className="cart__order">
           <h3>Total Amount: {totalPrice} UZS </h3>
+          {needComments ? (<textarea onChange={(e) => setComments(e.target.value)} id="comment" placeholder="Your comment..."></textarea>) : (<button onClick={() => setNeedComments(true)}>Comments ?</button>)}
           <button onClick={createOrder}>Order</button>
         </div>
       </div> : (

@@ -1,0 +1,53 @@
+.allorders-page {
+  padding-bottom: 100px;
+}
+
+.rows__title {
+  margin-bottom: 20px;
+  margin-left: 5px;
+}
+
+.action-btn-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.confirm-btn {
+  padding: 5px;
+  background-color: grey;
+  border-radius: 4px;
+  border: none;
+
+  svg {
+    fill: #fff;
+  }
+}
+
+.cancel-btn {
+  padding: 5px;
+  background-color: red;
+  border-radius: 4px;
+  border: none;
+
+  svg {
+    fill: #fff;
+  }
+}
+
+.status {
+  color: #fff;
+  text-align: center;
+}
+
+.success {
+  background-color: green;
+}
+
+.accepted {
+  background-color: blue;
+}
+
+.canceled {
+  background-color: red;
+}

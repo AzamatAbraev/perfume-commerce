@@ -1,3 +1,5 @@
+@use "@/general-styles/variables.scss" as vrb;
+
 .product__img {
   position: relative;
   width: 100%;
@@ -51,7 +53,7 @@
 }
 
 .category__info {
-  background-color: #F67449;
+  background-color: vrb.$secondary;
   color: #fff;
   position: absolute;
   bottom: 5px;
@@ -67,7 +69,7 @@
     padding: 10px 20px;
     width: 100%;
     font-size: 18px;
-    background-color: #F67449;
+    background-color: vrb.$secondary;
     border-radius: 5px;
     border: none;
     color: #fff;

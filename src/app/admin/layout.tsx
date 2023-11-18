@@ -167,7 +167,7 @@ export default function Dashboard({ children }: ChildrenType) {
       </Dialog>
       <Box sx={{ display: 'flex', position: "fixed", inset: "0" }}>
         <CssBaseline />
-        <AppBar style={{backgroundColor: "#F67449"}} position="absolute" open={open}>
+        <AppBar style={{backgroundColor: "#093545"}} position="absolute" open={open}>
           <Toolbar
             sx={{
               pr: '24px',
@@ -219,12 +219,12 @@ export default function Dashboard({ children }: ChildrenType) {
           <List component="nav">
             {mainListItems}
             <Divider sx={{ my: 3 }} />
-            <Link className="dashboard-link" href="/account">
+            <a className="dashboard-link" href="/admin/profile">
               <ListItemIcon>
                 <AccountCircleIcon />
               </ListItemIcon>
               <ListItemText primary="Account" />
-            </Link>
+            </a>
             <ListItemButton onClick={handleClickOpen}>
               <ListItemIcon>
                 <LogoutIcon />

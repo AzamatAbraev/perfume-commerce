@@ -26,7 +26,7 @@ const ProductPage = async ({
   const {data: category} = await request.get(`category/${product.category}`)
 
   return <section className="oneproduct">
-    <div className="oneproduct__main">
+    <div className="oneproduct__main container">
       <h1 className="product__title">{product.title}</h1>
       <div className="product__row">
         <div className="oneproduct__product__img">

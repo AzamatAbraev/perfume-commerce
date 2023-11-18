@@ -23,7 +23,7 @@ const AddButton = (product: ProductType) => {
           product?.price,
         )
       }
-      className={isProductInCart(product?._id) ? "add-in-cart" : "add__btn"} disabled={isProductInCart(product?._id) || product?._id === null ? true : false}
+      className={isProductInCart(product?._id) ? "add-in-cart" : "add__btn"}
     >
       {isProductInCart(product?._id) ? "Added" : "Add to cart"}
     </button>
