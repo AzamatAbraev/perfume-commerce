@@ -15,7 +15,6 @@ const AllProductsPage = async() => {
   return (
     <section className="all-products">
       <div className="container products__container">
-        <h1 className="allproducts__title">Products ()</h1>
         <ProductCard/>
       </div>
     </section>

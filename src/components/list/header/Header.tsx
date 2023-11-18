@@ -135,7 +135,7 @@ const Header = () => {
                 <p>My Cart </p>
               </Link>
             </li>
-            {isAuthenticated ? (<li className="nav__item">
+            {isAuthenticated && user?.role === 0 ? (<li className="nav__item">
                 <Link className="nav__cart" href="/orders">
                   <Badge badgeContent={ordersTotal} color="secondary">
                     <PaymentIcon />
@@ -144,8 +144,8 @@ const Header = () => {
                 </Link>
               </li>) : null}
              {authenticated ? (<li className="nav__item">
-                <Link className="nav__login" href="/account">
-                  {user?.firstName}
+                <Link className="nav__login" href={user?.role !== 1 ? `/account` : `/admin`}>
+                  {user?.role === 0 ? user?.firstName : "Dashboard"}
                 </Link>
               </li>): (<li className="nav__item">
                 <Link className="nav__login" href="/login">
