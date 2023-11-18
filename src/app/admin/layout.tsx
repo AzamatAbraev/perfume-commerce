@@ -1,6 +1,5 @@
 "use client"
 
-// import * as React from 'react';
 import React, { useEffect, useState } from "react";
 import { ChildrenType } from "@/types/children";
 import { useRouter } from 'next/navigation';
@@ -39,8 +38,15 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import PeopleIcon from '@mui/icons-material/People';
+import Inventory2Icon from '@mui/icons-material/Inventory2';
+import CategoryIcon from '@mui/icons-material/Category';
 
 import useScreenSize from "@/utils/useScreen";
+import "@/general-styles/dashboard.scss";
+import { usePathname } from 'next/navigation'
 
 
 
@@ -73,6 +79,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     '& .MuiDrawer-paper': {
       position: 'relative',
       whiteSpace: 'nowrap',
+      backgroundColor: "#093545",
       width: drawerWidth,
       transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
@@ -102,6 +109,9 @@ export default function Dashboard({ children }: ChildrenType) {
   const [open, setOpen] = useState(true);
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
+
+  const pathname = usePathname();
+  console.log(pathname)
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -174,8 +184,8 @@ export default function Dashboard({ children }: ChildrenType) {
             }}
           >
             <IconButton
+              className="dashboard-toggle"
               edge="start"
-              color="inherit"
               aria-label="open drawer"
               onClick={toggleDrawer}
               sx={{
@@ -183,7 +193,7 @@ export default function Dashboard({ children }: ChildrenType) {
                 ...(open && { display: 'none' }),
               }}
             >
-              <MenuIcon />
+              <MenuIcon style={{fill: "#fff"}} />
             </IconButton>
             <Typography
               component="h1"
@@ -194,7 +204,7 @@ export default function Dashboard({ children }: ChildrenType) {
             >
               Vodiy Perfume
             </Typography>
-            <IconButton color="inherit">
+            <IconButton style={{color: "#fff"}}>
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
               </Badge>
@@ -216,16 +226,47 @@ export default function Dashboard({ children }: ChildrenType) {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List component="nav">
-            {mainListItems}
-            <Divider sx={{ my: 3 }} />
-            <a className="dashboard-link" href="/admin/profile">
+          <List className="nav" component="nav">
+            <React.Fragment>
+              <Link className={`dashboard-link ${pathname === "/admin" ? "active" : ""}`} href="/admin">
+                <ListItemIcon>
+                  <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary="Dashboard" />
+              </Link>
+              <Link className={`dashboard-link ${pathname === "/admin/users" ? "active" : ""}`} href="/admin/users">
+                <ListItemIcon>
+                  <PeopleIcon />
+                </ListItemIcon>
+                <ListItemText primary="Users" />
+              </Link>
+              <Link className={`dashboard-link ${pathname === "/admin/allorders" ? "active" : ""}`} href="/admin/allorders">
+                <ListItemIcon>
+                  <Inventory2Icon />
+                </ListItemIcon>
+                <ListItemText primary="Orders" />
+              </Link>
+              <Link className={`dashboard-link ${pathname === "/admin/categories" ? "active" : ""}`} href="/admin/categories">
+                <ListItemIcon>
+                  <CategoryIcon />
+                </ListItemIcon>
+                <ListItemText primary="Categories" />
+              </Link>
+              <Link className={`dashboard-link ${pathname === "/admin/products" ? "active" : ""}`} href="/admin/products">
+                <ListItemIcon>
+                  <ShoppingCartIcon />
+                </ListItemIcon>
+                <ListItemText primary="Products" />
+              </Link>
+            </React.Fragment>
+            <Divider sx={{ my: 3, color: "#fff" }} />
+            <Link className={`dashboard-link ${pathname === "/admin/profile" ? "active" : ""}`} href="/admin/profile">
               <ListItemIcon>
                 <AccountCircleIcon />
               </ListItemIcon>
               <ListItemText primary="Account" />
-            </a>
-            <ListItemButton onClick={handleClickOpen}>
+            </Link>
+            <ListItemButton className="dashboard-link" onClick={handleClickOpen}>
               <ListItemIcon>
                 <LogoutIcon />
               </ListItemIcon>

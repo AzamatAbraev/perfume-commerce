@@ -37,6 +37,7 @@ const useProducts = create<AllProductsType>()((set, get) => ({
 
   getProducts: async (page, search) => {
     try {
+      set({loading: true})
       const params = {
         page,
         search,
@@ -46,6 +47,7 @@ const useProducts = create<AllProductsType>()((set, get) => ({
       } = await request.get("product", { params });
       set({ products, total });
     } finally {
+      set({loading: false})
     }
   },
 

@@ -16,6 +16,7 @@ import convertTimestamp from "@/utils/convertTime";
 import {toast} from "react-toastify";
 import CancelIcon from '@mui/icons-material/Cancel';
 import Chip from '@mui/material/Chip';
+import Loading from "@/components/loading/Loading";
 
 
 import "./style.scss";
@@ -43,6 +44,8 @@ const AllOrdersPage = () => {
   const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState([])
   const [update, setUpdate] = useState(false);
+  const [status, setStatus] = useState("ACCEPTED");
+  const [newOrders, setNewOrders] = useState([]);
 
 
   useEffect(() => {
@@ -50,13 +53,15 @@ const AllOrdersPage = () => {
       try {
         setLoading(true);
         const {data} = await request.get("payment");
+        const orders = data?.filter((order: any) => order?.status === status);
+        setNewOrders(orders);
         setOrders(data);
       } finally {
         setLoading(false);
       }
     }
     getOrders();
-  }, [update])
+  }, [update, status])
 
   const confirmOrder = async(id: string) => {
     try {
@@ -80,11 +85,22 @@ const AllOrdersPage = () => {
     }
   }
 
+  const handleCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setStatus(event.target.value);
+  }
+
   
   return <div className="allorders-page">
-    <TableContainer component={Paper}>
+   {loading ? <Loading/> : <TableContainer component={Paper}>
       <div className="table-header">
-        <h1 className="rows__title">Orders ({orders?.length})</h1>
+        <h1 className="rows__title">Orders ({newOrders?.length})</h1>
+        <div className="category-selector">
+          <select onChange={handleCategory} name="category" id="category">
+            <option value="ACCEPTED">Accepted</option>
+            <option value="SUCCESS">Success</option>
+            <option value="CANCELED">Canceled</option>
+          </select>
+        </div>
       </div>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
@@ -97,7 +113,7 @@ const AllOrdersPage = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {orders?.map((order: any) => (
+          {newOrders?.map((order: any) => (
             <StyledTableRow key={order?._id}>
               <StyledTableCell component="th" scope="row">
                 {order?._id}
@@ -113,7 +129,7 @@ const AllOrdersPage = () => {
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </TableContainer>}
   </div>;
 };
 

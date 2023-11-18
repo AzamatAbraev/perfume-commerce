@@ -1,10 +1,51 @@
+@use "@/general-styles/variables.scss" as vrb;
+
 .dashboard-link {
   display: flex;
   align-items: center;
   padding: 8px 16px;
+  border-radius: 5px;
+  margin-right: 5px;
+  margin-left: 5px;
 
   span {
-    color: #000000DE;
+    color: #fff;
+  }
+
+  svg {
+    fill: #fff;
+  }
+}
+
+.css-i4bv87-MuiSvgIcon-root {
+  fill: #fff;
+}
+
+.css-78trlr-MuiButtonBase-root-MuiIconButton-root {
+  background-color: grey;
+  opacity: 0.8;
+}
+
+.css-ylb11c-MuiDivider-root {
+  // color: #fff;
+  background-color: #fff;
+}
+
+.dashboard-toggle {
+  svg {
+    fill: #fff !important;
+  }
+}
+
+.nav .active {
+  background-color: #fff;
+  
+  span {
+    color: vrb.$secondary;
+  }
+
+  svg {
+    fill: vrb.$secondary;
   }
 }
 
@@ -16,6 +57,7 @@
 
 .dashboard__card {
   padding: 32px 24px;
+  background-color: #fff;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 10px;
 }
@@ -94,5 +136,24 @@
   }
 }
 
+
+.css-10lpkvh {
+  background: linear-gradient(-45deg, #304e94, #093545, #59b5c4, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  margin-top: 60px;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
 
 

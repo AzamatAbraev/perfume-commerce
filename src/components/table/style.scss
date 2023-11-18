@@ -6,6 +6,11 @@
   display: flex;
   justify-content: center !important;
   text-align: center;
+
+  button {
+    color: #fff;
+    background-color: vrb.$secondary;
+  }
 }
 
 .action-btn {
@@ -25,7 +30,7 @@
   }
 }
 
-.table-header {
+.users-table-header {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -41,6 +46,10 @@
 .modal-title {
   font-size: 25px;
   text-align: center;
+}
+
+.users__title {
+  color: #fff;
 }
 
 // .edit-btn {

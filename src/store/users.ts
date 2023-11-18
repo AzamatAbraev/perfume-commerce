@@ -36,6 +36,7 @@ const useUsers = create<AllUsersType>()((set, get) => ({
 
   getUsers: async (page, search) => {
     try {
+      set({loading: true})
       const params = {
         page,
         search,
@@ -43,6 +44,7 @@ const useUsers = create<AllUsersType>()((set, get) => ({
       const {data: {users, total}} = await request.get("user", {params});
       set({users, total})
     } finally {
+      set({loading: false})
     }
   },
   
@@ -69,6 +71,7 @@ const useUsers = create<AllUsersType>()((set, get) => ({
       set({loading: false})
     }
   },
+
   deleteUser: async(id) => {
     try {
       set({loading: true});

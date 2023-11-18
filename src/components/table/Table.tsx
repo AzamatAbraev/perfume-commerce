@@ -50,13 +50,28 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+
 export default function GeneralTable() {
-  const {users, total, loading, getUsers, addUser, editUser, deleteUser} = useUsers();
+  const {users, total, getUsers, addUser, deleteUser} = useUsers();
 
   const [page, setPage] = useState(1);
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState<string>("");
   const [selected, setSelected] = useState<null | string>(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    let timerId = setTimeout(() => {
+      setLoading(false)
+    }, 700)
+
+    return () => {
+      clearTimeout(timerId)
+    }
+  }, [])
+
+  console.log(loading)
 
 
   const [formData, setFormData] = useState({
@@ -123,8 +138,8 @@ export default function GeneralTable() {
   
   return (
     <>
-    {loading ? <Loading/> : <Fragment>
-      <div className="table-header">
+    {loading ? <Loading/> : (<Fragment>
+      <div className="users-table-header">
         <h1 className="users__title">Users ({total})</h1>
           <Paper
             component="form"
@@ -243,7 +258,7 @@ export default function GeneralTable() {
             <Button onClick={() => handleUser()}>{selected === null ? "Add user" : "Save user"}</Button>
           </DialogActions>
         </Dialog>
-    </Fragment>}
+    </Fragment>)}
     </>
   );
 }

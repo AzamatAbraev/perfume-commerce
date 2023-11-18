@@ -1,10 +1,7 @@
+@use "@/general-styles/variables.scss" as vrb;
+
 .allorders-page {
   padding-bottom: 100px;
-}
-
-.rows__title {
-  margin-bottom: 20px;
-  margin-left: 5px;
 }
 
 .action-btn-container {
@@ -22,6 +19,38 @@
   svg {
     fill: #fff;
   }
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 10px;
+}
+
+.category-selector {
+  select {
+    background-color: #093545;
+    color: white;
+    padding: 12px;
+    width: 250px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+  }
+}
+
+.category-selector::before {
+  content: "\f13a";
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.category-selector select option {
+  padding: 30px;
 }
 
 .cancel-btn {
@@ -45,7 +74,7 @@
 }
 
 .accepted {
-  background-color: blue;
+  background-color: vrb.$secondary;
 }
 
 .canceled {

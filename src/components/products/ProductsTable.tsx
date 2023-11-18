@@ -53,7 +53,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function ProductsTable() {
-  const { products, total, loading, getProducts, addProduct, editProduct, deleteProduct } = useProducts();
+  const { products, total, getProducts, addProduct, editProduct, deleteProduct } = useProducts();
 
   const [page, setPage] = useState(1);
   const [open, setOpen] = useState(false);
@@ -62,6 +62,19 @@ export default function ProductsTable() {
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
   const [photo, setPhoto] = useState<{public_id: string, url: string}>({public_id: "", url: ""});
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    let timerId = setTimeout(() => {
+      setLoading(false)
+    }, 700)
+
+    return () => {
+      clearTimeout(timerId)
+    }
+  }, [])
   
 
   const [formData, setFormData] = useState({
@@ -156,7 +169,7 @@ export default function ProductsTable() {
   return (
     <>
       {loading ? <Loading /> : <Fragment>
-        <div className="table-header">
+        <div className="users-table-header">
           <h1 className="users__title">Products ({total})</h1>
           <Paper
             component="form"

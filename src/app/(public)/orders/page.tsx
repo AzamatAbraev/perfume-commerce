@@ -44,13 +44,13 @@ const OrdersPage = () => {
 
 
   useEffect(() => {
-    const getUserPayments = async () => {
-      const { data } = await request.get("auth/payments");
-      setOrders(data);
-      const products = data.map((order: Order) => order.cart.map((item: any) => item.product)).flat();
-      setOrderProducts(products);
-    };
-    getUserPayments();
+      const getUserPayments = async () => {
+        const { data } = await request.get("auth/payments");
+        setOrders(data);
+        const products = data.map((order: Order) => order.cart.map((item: any) => item.product)).flat();
+        setOrderProducts(products);
+      };
+      getUserPayments();
   }, [])
 
 
