@@ -12,26 +12,22 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
-import Cookies from 'js-cookie';
+import {request} from "@/server/request";
+import {toast} from "react-toastify";
 
 
 import CartType from "@/types/cart";
 
 import "./style.scss";
-import useAuth from "@/store/auth";
-import { toast } from "react-toastify";
-import { USER_DATA, USER_TOKEN } from "@/constants";
 import { useRouter } from "next/navigation";
 
 const CartCard = () => {
   const [open, setOpen] = useState(false);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [openModal, setOpenModal] = useState(false);
-  const { isAuthenticated, user, setIsAuthenticated } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
-
-
 
   const { cart, setCart } = useCart();
 
@@ -77,7 +73,7 @@ const CartCard = () => {
     setCart(newCart.filter(Boolean) as CartType[]);
   };
 
-    useEffect(() => {
+  useEffect(() => {
     const newTotalPrice = newCart.reduce((acc, product) => {
       return acc + (product?.price || 0) * (product?.quantity || 0);
     }, 0);
@@ -95,6 +91,26 @@ const CartCard = () => {
   const handleOk = () => {
     
   }
+
+  const createOrder = async () => {
+    try {
+      setLoading(true)
+      const order = {
+        cart: 
+        newCart.map((product) => ({
+          product: product?.id,
+          quantity: product?.quantity,
+        })),
+        comment: "Urgent"
+      }
+      await request.post("payment", order);
+      localStorage.removeItem("CART");
+      router.push("/")
+      toast.success('Order created successfully!');
+    } finally {
+      setLoading(true)
+    }
+  };
 
   return (
     <Fragment>
@@ -154,7 +170,7 @@ const CartCard = () => {
         ))}
         <div className="cart__order">
           <h3>Total Amount: {totalPrice} UZS </h3>
-          <button>Order</button>
+          <button onClick={createOrder}>Order</button>
         </div>
       </div> : (
       <div className="nodata__found">

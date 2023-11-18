@@ -11,6 +11,7 @@ interface LatestType {
   quantity: number;
   cart: CartType[];
   data: CategoryType[];
+  orders: [],
   getData: () => void;
   addToCart: (
     id: string,
@@ -20,6 +21,7 @@ interface LatestType {
     price: number,
   ) => void;
   setCart: (newCart: CartType[]) => void;
+  getOrders: () => void;
 }
 
 const productJson = typeof window !== 'undefined' ? localStorage.getItem(CART) : false;
@@ -29,6 +31,7 @@ const useCart = create<LatestType>()((set, get) => ({
   loading: false,
   quantity: 1,
   data: [],
+  orders: [],
   cart,
 
   getData: async () => {
@@ -68,6 +71,12 @@ const useCart = create<LatestType>()((set, get) => ({
     set({ cart: newCart })
     localStorage.setItem(CART, JSON.stringify(get().cart));
   },
+
+  getOrders: async() => {
+    const { data } = await request.get("auth/payments");
+    set({orders: data});
+  },
+
 
 }));
 

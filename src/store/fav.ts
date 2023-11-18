@@ -45,7 +45,7 @@ const useFav = create<FavouriteProducts>()((set, get) => ({
   },
 
   removeFromCart: async (id) => {
-    const {cart, setCart} = get();
+    const {cart} = get();
     const newCart = cart.filter((product) => product.id !== id)
     set({cart: newCart})
     localStorage.setItem(FAV, JSON.stringify(newCart))

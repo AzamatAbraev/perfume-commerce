@@ -23,6 +23,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
+import PaymentIcon from '@mui/icons-material/Payment';
 
 import { USER_DATA, USER_TOKEN } from "@/constants";
 
@@ -36,9 +37,10 @@ const Header = () => {
   const [totalFav, setTotalFav] = useState(0);
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [openModal, setOpenModal] = useState(false);
+  const [ordersTotal, setOrdersTotal] = useState(0);
 
   const {isAuthenticated, user, setIsAuthenticated} = useAuth();
-  const { cart } = useCart();
+  const { cart, orders, getOrders } = useCart();
   const { cart: favCart } = useFav();
 
   const router = useRouter();
@@ -53,6 +55,10 @@ const Header = () => {
   const controlNav = () => {
     setIsNavOpen(!isNavOpen);
   };
+
+  useEffect(() => {
+    getOrders();
+  }, [getOrders])
 
   const logout = () => {
     localStorage.removeItem(USER_DATA);
@@ -75,7 +81,8 @@ const Header = () => {
     setTotalCart(cart.length);
     setTotalFav(favCart.length)
     setAuthenticated(isAuthenticated)
-  }, [cart.length, favCart.length, isAuthenticated])
+    setOrdersTotal(orders.length);
+  }, [cart.length, favCart.length, isAuthenticated, orders.length])
 
   return (
     <header>
@@ -128,6 +135,14 @@ const Header = () => {
                 <p>My Cart </p>
               </Link>
             </li>
+            {isAuthenticated ? (<li className="nav__item">
+                <Link className="nav__cart" href="/orders">
+                  <Badge badgeContent={ordersTotal} color="secondary">
+                    <PaymentIcon />
+                  </Badge>
+                  <p>Orders</p>
+                </Link>
+              </li>) : null}
              {authenticated ? (<li className="nav__item">
                 <Link className="nav__login" href="/account">
                   {user?.firstName}
@@ -171,6 +186,14 @@ const Header = () => {
                   <p>My Cart</p>
                 </Link>
               </li>
+              {isAuthenticated ? (<li className="nav__item">
+                <Link className="nav__cart" href="/orders">
+                  <Badge badgeContent={ordersTotal} color="secondary">
+                    <PaymentIcon />
+                  </Badge>
+                  <p>Orders</p>
+                </Link>
+              </li>) : null}
               {authenticated ? (<li className="nav__item">
                 <Link className="nav__login" href="/account">
                   {user?.firstName}

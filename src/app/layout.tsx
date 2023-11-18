@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: ChildrenType) {
   return (
     <html lang="en">
-      <body className={jakarta.className}>
+      <body className={jakarta.className} suppressHydrationWarning={true}>
         <ToastContainer autoClose={1000} />
         {children}
         </body>
