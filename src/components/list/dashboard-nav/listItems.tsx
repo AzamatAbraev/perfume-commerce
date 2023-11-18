@@ -10,8 +10,6 @@ import Link from "next/link";
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import CategoryIcon from '@mui/icons-material/Category';
 
-
-
 import "@/general-styles/dashboard.scss";
 
 export const mainListItems = (
