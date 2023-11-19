@@ -71,8 +71,6 @@ export default function GeneralTable() {
     }
   }, [])
 
-  console.log(loading)
-
 
   const [formData, setFormData] = useState({
     firstName: "",

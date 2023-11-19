@@ -111,7 +111,6 @@ export default function Dashboard({ children }: ChildrenType) {
   const [openModal, setOpenModal] = useState(false);
 
   const pathname = usePathname();
-  console.log(pathname)
 
   useEffect(() => {
     if (isAuthenticated) {

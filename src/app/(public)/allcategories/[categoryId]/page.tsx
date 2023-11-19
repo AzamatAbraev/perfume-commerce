@@ -1,15 +1,18 @@
 import DynamicMetaData from "@/types/metaData";
+import OneCategoryRow from "@/components/card/OneCategoryRow";
 
 export function generateMetadata({ params, searchParams }: DynamicMetaData) {
-  const { productId } = params;
+  const { categoryId } = params;
   return {
-    title: productId,
-    description: productId,
+    title: categoryId,
+    description: categoryId,
   };
 }
 
 const CategoryPage = () => {
-  return <div>CategoryPage</div>;
+  return <div style={{paddingBottom: "50px"}} className="container">
+    <OneCategoryRow/>
+  </div>;
 };
 
 export default CategoryPage;

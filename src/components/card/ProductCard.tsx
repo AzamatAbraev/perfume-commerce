@@ -74,7 +74,6 @@ const ProductCard = () => {
 
   const controlPages = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
-    console.log(value);
   }
 
   const isProductInFav = (productId: string) => {

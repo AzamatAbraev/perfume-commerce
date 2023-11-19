@@ -5,17 +5,21 @@ import CategoryIcon from '@mui/icons-material/Category';
 import GridOnIcon from '@mui/icons-material/GridOn';
 
 import useUsers from "@/store/users";
-import useCategories from "@/store/categories"
-import useProducts from "@/store/products"
-import {useEffect} from "react";
+import useCategories from "@/store/categories";
+import useProducts from "@/store/products";
+import {useEffect, useState} from "react";
+import Loading from "@/components/loading/Loading";
+import {request} from "@/server/request";
 
 import "@/general-styles/dashboard.scss";
 import "@/components/loading/Loading"
 
 const DashboardPage = () => {
-  const {getUsers, total, loading} = useUsers();
+  const {getUsers, total} = useUsers();
   const {data: categories, getData} = useCategories();
   const {total: products, getProducts} = useProducts();
+  const [loading, setLoading] = useState(false);
+  const [ordersTotal, setOrdersTotal] = useState(0);
 
   useEffect(() => {
     getUsers();
@@ -23,13 +27,26 @@ const DashboardPage = () => {
     getProducts();
   }, [getUsers, getData, getProducts])
 
+  useEffect(() => {
+    const getOrders = async () => {
+      try {
+        setLoading(true);
+        const {data} = await request.get("payment");
+        setOrdersTotal(data.length)
+      } finally {
+        setLoading(false);
+      }
+    }
+    getOrders();
+  }, [])
+
   return <div>
-    <div className="dashboard__row">
+    {loading ? <Loading/> : <div className="dashboard__row">
       <div className="dashboard__card">
         <div className="card__top">
           <div className="card__title">
             <h3>Orders</h3>
-            <p>24k</p>
+            <p>{ordersTotal}</p>
           </div>
           <div className="card__image">
             <PaidIcon/>
@@ -81,7 +98,7 @@ const DashboardPage = () => {
           <p>+12<span>new products</span></p>
         </div>
       </div>
-    </div>
+    </div>}
   </div>;
 };
 

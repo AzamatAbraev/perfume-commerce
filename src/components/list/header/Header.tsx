@@ -145,7 +145,7 @@ const Header = () => {
               </li>) : null}
              {authenticated ? (<li className="nav__item">
                 <Link className="nav__login" href={user?.role !== 1 ? `/account` : `/admin`}>
-                  {user?.role === 0 ? user?.firstName : "Dashboard"}
+                  {user?.role === 0 ? user?.firstName : "Admin"}
                 </Link>
               </li>): (<li className="nav__item">
                 <Link className="nav__login" href="/login">

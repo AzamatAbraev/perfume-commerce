@@ -15,6 +15,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Loading from "@/components/loading/Loading"
+import Link from 'next/link'
+
 
 
 import "./style.scss";
@@ -24,8 +26,6 @@ const CategoriesPage = () => {
   const [open, setOpen] = useState(false);
   const [photo, setPhoto] = useState<{public_id: string, url: string}>({public_id: "", url: ""});
   const [selected, setSelected] = useState<string | null >(null)
-
-  console.log(loading);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -97,7 +97,7 @@ const CategoriesPage = () => {
             <div className="category__btn__container">
               <button onClick={() =>handleEdit(category?._id)}><EditIcon/></button>
               <button onClick={() => deleteCategory(category?._id)}><DeleteIcon/></button>
-              <button><MoreIcon/></button>
+              <Link href={`/allcategories/${category?._id}`}><MoreIcon/></Link>
             </div>
           </div>
         </div>))}

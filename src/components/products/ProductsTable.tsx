@@ -214,7 +214,7 @@ export default function ProductsTable() {
                   <StyledTableCell align="right">{product?.quantity || "10"}</StyledTableCell>
                   <StyledTableCell align="right">{product?.category.name}</StyledTableCell>
                   <StyledTableCell className="action-btn" align="right">
-                    <button onClick={() => deleteProduct(product?._id)} className="delete-btn"><DeleteIcon /></button>
+                    <button style={{marginLeft: "5px", marginRight: "5px"}} onClick={() => deleteProduct(product?._id)} className="delete-btn"><DeleteIcon /></button>
                     <button onClick={() => handleEdit(product?._id)} className="edit-btn"><EditIcon /></button>
                   </StyledTableCell>
                 </StyledTableRow>
