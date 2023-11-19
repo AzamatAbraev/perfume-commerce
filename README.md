@@ -17,7 +17,7 @@ The website consists of **three main parts**:
 
 User: You can register and create your own password.
 
-Admin: If you want to see the admin side of the website, username and password should be "abdulaziz" and "1234567" respective. In case the password has changed, please feel free to contact me at azamatabraev03@gmail.com 
+Admin: If you want to see the admin side of the website, username and password should be "abdulaziz" and "1234567" respectively. In case the password has changed, please feel free to contact me at azamatabraev03@gmail.com 
 
 
 **Live demo:** https://vp-commerce.vercel.app/
