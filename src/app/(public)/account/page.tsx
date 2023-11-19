@@ -1,10 +1,10 @@
 "use client";
 
 import {useEffect} from "react";
-import PublicAccountForm from "@/components/form/NewAccountForm";
 import { useRouter } from 'next/navigation';
-import useAuth from "@/store/auth";
 
+import PublicAccountForm from "@/components/form/NewAccountForm";
+import useAuth from "@/store/auth";
 
 import "./style.scss";
 

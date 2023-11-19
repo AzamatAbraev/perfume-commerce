@@ -1,11 +1,16 @@
 import DynamicMetaData from "@/types/metaData";
+
+import {request} from "@/server/request";
 import OneCategoryRow from "@/components/card/OneCategoryRow";
 
-export function generateMetadata({ params, searchParams }: DynamicMetaData) {
+export async function generateMetadata({ params, searchParams }: DynamicMetaData) {
   const { categoryId } = params;
+
+  const {data} = await request.get(`category/${categoryId}`)
+
   return {
-    title: categoryId,
-    description: categoryId,
+    title: data?.name,
+    description: data?.name,
   };
 }
 

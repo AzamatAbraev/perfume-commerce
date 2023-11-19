@@ -172,7 +172,7 @@ const CartCard = () => {
         ))}
         <div className="cart__order">
           <h3>Total Amount: {totalPrice} UZS </h3>
-          {needComments ? (<textarea onChange={(e) => setComments(e.target.value)} id="comment" placeholder="Your comment..."></textarea>) : (<button onClick={() => setNeedComments(true)}>Comments ?</button>)}
+          {needComments ? (<textarea onChange={(e) => setComments(e.target.value)} id="comment" className="comment-area" placeholder="Your comment..."></textarea>) : (<button onClick={() => setNeedComments(true)}>Comments ?</button>)}
           <button onClick={createOrder}>Order</button>
         </div>
       </div> : (

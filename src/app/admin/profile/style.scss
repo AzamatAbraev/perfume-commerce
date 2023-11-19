@@ -12,6 +12,15 @@
 
   &__header {
     margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  &__password {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
   &__row {

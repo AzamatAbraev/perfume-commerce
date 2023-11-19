@@ -13,9 +13,10 @@ import useFav from "@/store/fav";
 import { request } from "@/server/request";
 
 
-import "@/general-styles/product-card.scss";
 import ProductType from "@/types/product";
 import { LIMIT } from "@/constants";
+
+import "@/general-styles/product-card.scss";
 
 interface ParamTypes {
   limit: number,
@@ -161,13 +162,13 @@ const ProductCard = () => {
               href={`/allproducts/${product?._id}`}
               className="allproducts__content"
             >
-              <h3>{product?.title || "Title"}</h3>
-              <p>{product?.description || "Quality Product"}</p>
-              <p>Sold: {product?.sold}</p>
-              <p>In stock: {product?.quantity || "Unknown"}</p>
-              <p>Price: {product?.price || "Unknown"} UZS</p>
+              <h3><span>{product?.title || "Title"}</span></h3>
+              <p><span>{product?.description || "Quality Product"}</span></p>
+              <p>Sold: <span>{product?.sold}</span></p>
+              <p>In stock: <span>{product?.quantity || "Unknown"}</span></p>
+              <p className="product__price">Price: <span>{product?.price || "Unknown"}</span> UZS</p>
             </Link>
-            <div className="button__wrapper">
+            <div className="button__wrapper product__footer">
               <button
                 onClick={() =>
                   addToCart(

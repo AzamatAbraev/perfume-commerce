@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 
 import LoginForm from "@/components/form/LoginForm";
+import PublicLoginForm from "@/components/form/NewLoginForm";
 
 import "./style.scss";
-import PublicLoginForm from "@/components/form/NewLoginForm";
 
 export const metadata: Metadata = {
   title: "Vodiy perfume | Login",

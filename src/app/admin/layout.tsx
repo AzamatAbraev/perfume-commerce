@@ -1,21 +1,24 @@
 "use client"
 
 import React, { useEffect, useState } from "react";
-import { ChildrenType } from "@/types/children";
-import { useRouter } from 'next/navigation';
-import useAuth from "@/store/auth";
 import {toast} from "react-toastify";
 import Cookies from "js-cookie";
-import { USER_DATA, USER_TOKEN } from "@/constants";
+
 import Link from 'next/link'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation'
 
+import { ChildrenType } from "@/types/children";
+import useAuth from "@/store/auth";
+import { USER_DATA, USER_TOKEN } from "@/constants";
+import useScreenSize from "@/utils/useScreen";
 
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
@@ -24,13 +27,14 @@ import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems } from "@/components/list/dashboard-nav/listItems";
 import LogoutIcon from '@mui/icons-material/Logout';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import { mainListItems } from "@/components/list/dashboard-nav/listItems";
 
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -44,11 +48,8 @@ import PeopleIcon from '@mui/icons-material/People';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
 import CategoryIcon from '@mui/icons-material/Category';
 
-import useScreenSize from "@/utils/useScreen";
+
 import "@/general-styles/dashboard.scss";
-import { usePathname } from 'next/navigation'
-
-
 
 const drawerWidth: number = 240;
 

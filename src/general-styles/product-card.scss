@@ -43,6 +43,11 @@
   flex-direction: column;
   gap: 10px;
   color: #000;
+
+  span {
+    color: vrb.$secondary;
+    font-weight: 600;
+  }
 }
 
 .pagination {

@@ -1,7 +1,9 @@
-import Carousel from "@/components/slider/Slider";
 import Link from "next/link";
 import Image from "next/image";
+
+import Carousel from "@/components/slider/Slider";
 import CategoryRow from "@/components/card/CategoryCard";
+
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import shopping from "@/assets/shopping-main.webp";
 
