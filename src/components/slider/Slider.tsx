@@ -82,7 +82,7 @@ const Carousel = () => {
     ],
   };
   return (
-    <div>
+    <div className="products__carousel">
       {isLoading ? <Loading/> : 
       <Slider {...settings}>
         {latestProducts?.map((product) => (

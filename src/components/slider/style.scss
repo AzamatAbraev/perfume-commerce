@@ -4,7 +4,6 @@
   padding: 20px;
   position: relative;
   height: 300px;
-  max-width: 300px;
   cursor: pointer;
 
   img {
@@ -14,6 +13,11 @@
 
 .in-fav {
   background-color: red;
+}
+
+.products__carousel {
+  background-color: vrb.$secondary;
+  border-radius: 10px;
 }
 
 
@@ -29,6 +33,7 @@
 
 .products__card {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: #fff;
 }
 
 .products__card {

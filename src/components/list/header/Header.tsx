@@ -57,8 +57,8 @@ const Header = () => {
   };
 
   useEffect(() => {
-    getOrders();
-  }, [getOrders])
+    isAuthenticated && getOrders();
+  }, [getOrders, isAuthenticated])
 
   const logout = () => {
     localStorage.removeItem(USER_DATA);
@@ -110,7 +110,7 @@ const Header = () => {
       <nav className="nav">
         <div className="container nav__container">
           <div className="nav__logo">
-            <Link href="/">Logo</Link>
+            <Link href="/">VP Commerce</Link>
           </div>
           <ul className="nav__menu">
             <li className="nav__item">

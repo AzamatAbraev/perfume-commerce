@@ -1,9 +1,10 @@
 "use client";
 
 import {useEffect} from "react";
-import AccountForm from "@/components/form/AccountForm";
+import PublicAccountForm from "@/components/form/NewAccountForm";
 import { useRouter } from 'next/navigation';
 import useAuth from "@/store/auth";
+
 
 import "./style.scss";
 
@@ -18,7 +19,7 @@ const AccountPage = () => {
   }, [isAuthenticated, router])
   
   return <section className="accountpage">
-    <AccountForm/>
+    <PublicAccountForm />
   </section>;
 };
 

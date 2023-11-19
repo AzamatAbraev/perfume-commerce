@@ -21,6 +21,7 @@ interface ParamTypes {
   limit: number,
   search: string,
   page: number,
+  sort: string,
   category?: string,
 }
 
@@ -31,6 +32,8 @@ const ProductCard = () => {
   const [total, setTotal] = useState(1);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
+  const [price, setPrice] = useState("");
+  const [sales, setSales] = useState("");
 
   const {addToCart, cart: cartItems } = useCart();
   const {addToFav, cart} = useFav();
@@ -47,6 +50,7 @@ const ProductCard = () => {
         page,
         limit: LIMIT,
         search,
+        sort: price || sales,
       };
       if (category) {
         params.category = category;
@@ -56,7 +60,7 @@ const ProductCard = () => {
       setTotal(total);
     }
     getProducts();
-  }, [setCategories, setProducts, page, search, category])
+  }, [setCategories, setProducts, page, search, category, price, sales])
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
@@ -80,7 +84,17 @@ const ProductCard = () => {
   const isProductInCart = (productId: string) => {
     return cartItems.some((cartProduct) => cartProduct.id === productId);
   };
-  
+
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setPrice(event.target.value);
+    setPage(1);
+  };
+
+  const handleSalesChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSales(event.target.value);
+    setPage(1);
+  }
+
 
 
   return (
@@ -99,6 +113,16 @@ const ProductCard = () => {
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleSearch(event)}
           inputProps={{ "aria-label": "search products" }}
         />
+        <select onChange={(event) => handleSortChange(event)} className="category-sort" style={{ height: "100%" }}>
+          <option value="">Price</option>
+          <option value="-price">10-1</option>
+          <option value="price">1-10</option>
+        </select>
+        <select onChange={(event) => handleSalesChange(event)} className="category-sort" style={{ height: "100%" }}>
+          <option value="">Sales</option>
+          <option value="sold">Least popular</option>
+          <option value="-sold">Most popular</option>
+        </select>
         <select onChange={(event) => sortByCategory(event)} className="category-sort" style={{ height: "100%" }}>
           <option value="" style={{ height: "100%" }}>
             All
@@ -113,6 +137,7 @@ const ProductCard = () => {
             </option>
           ))}
         </select>
+
       </Paper>
       <div className="allproducts__row">
         {products?.map((product: ProductType) => (
@@ -139,7 +164,8 @@ const ProductCard = () => {
             >
               <h3>{product?.title || "Title"}</h3>
               <p>{product?.description || "Quality Product"}</p>
-              <p>In stock: {product?.quantity || "Uknown"}</p>
+              <p>Sold: {product?.sold}</p>
+              <p>In stock: {product?.quantity || "Unknown"}</p>
               <p>Price: {product?.price || "Unknown"} UZS</p>
             </Link>
             <div className="button__wrapper">

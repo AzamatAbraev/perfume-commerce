@@ -6,6 +6,7 @@ import Image from "next/image";
 import Alert from '@mui/material/Alert';
 
 import "./style.scss";
+import useAuth from "@/store/auth";
 
 
 interface Image {
@@ -44,16 +45,14 @@ const OrdersPage = () => {
 
 
   useEffect(() => {
-      const getUserPayments = async () => {
+    const getUserPayments = async () => {
         const { data } = await request.get("auth/payments");
         setOrders(data);
         const products = data.map((order: Order) => order.cart.map((item: any) => item.product)).flat();
         setOrderProducts(products);
-      };
-      getUserPayments();
+    };
+    getUserPayments();
   }, [])
-
-
 
   return <div className="container">
     <h1 className="order__title">Latest Orders</h1>
